@@ -3,9 +3,9 @@ project(ft_rtv1 C)
 
 set(CMAKE_C_STANDARD 99)
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -lmlx -lm -framework OpenGL -framework AppKit")
+#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -lmlx -lm -framework OpenGL -framework AppKit")
 
-add_executable(ft_rtv1 sources/main.c sources/ft_rtv1.h sources/rt_sphere.c)
+add_executable(ft_rtv1 sources/main.c sources/ft_rtv1.h sources/rt_sphere.c sources/ft_functions.c)
 
 link_directories(libft sources)
 

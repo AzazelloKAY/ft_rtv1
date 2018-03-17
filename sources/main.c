@@ -6,7 +6,7 @@
 /*   By: akokoshk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 20:42:53 by akokoshk          #+#    #+#             */
-/*   Updated: 2018/03/15 21:09:23 by akokoshk         ###   ########.fr       */
+/*   Updated: 2018/03/17 21:13:44 by akokoshk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,31 @@
 
 #include "ft_rtv1.h"
 
+void	print_v(t_vec *a)
+{
+	printf(">x=%10f y=%10f z=%10f\n", a->x, a->y, a->z);
+}
 int main()
 {
-	t_point a;
-	a.x = 12;
-	a.y = 23.124;
-	a.z = 123213.55;
+	t_vec a;
+	t_vec b;
 
-    printf("Hello, World!\n>%10f %10f %10f", a.y, a.x, a.z);
+	a.x = 1;
+	a.y = 23.124;
+	a.z = 5.55;
+
+	b.x = 2;
+	b.y = 30.124;
+	b.z = 6.55;
+
+	t_vec *z = ft_memalloc(sizeof(t_vec));
+	*z = v_add(a, b);
+
+
+	print_v(&a);
+	print_v(&b);
+
+    //printf(">%10f %10f %10f", ss->b.x, ss->b.y, ss->b.z);
     return 0;
 }
 

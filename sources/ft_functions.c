@@ -12,15 +12,5 @@
 
 #include "ft_rtv1.h"
 
-t_point	*new_point(double y, double x, double z)
-{
-	t_point *p;
 
-	if (!(p = ft_memalloc(sizeof(t_point))))
-		return (NULL);
-	p->y = y;
-	p->x = x;
-	p->z = z;
-	return (p);
-}
 

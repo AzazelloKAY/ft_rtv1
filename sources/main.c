@@ -6,7 +6,7 @@
 /*   By: akokoshk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 20:42:53 by akokoshk          #+#    #+#             */
-/*   Updated: 2018/03/17 21:13:44 by akokoshk         ###   ########.fr       */
+/*   Updated: 2018/03/18 18:50:43 by akokoshk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,67 @@ void	print_v(t_vec *a)
 {
 	printf(">x=%10f y=%10f z=%10f\n", a->x, a->y, a->z);
 }
+
+
+void 	test_rt()
+{
+	t_win *w;
+	t_sphere s;
+	t_point p;
+	t_vec	cam;
+	t_ray	r;
+
+	int i, j, k;
+
+	w = ft_init_mlx("test rtv");
+	ft_init_img(w);
+
+	s.radius = 100;
+	s.centr.x = 450;
+	s.centr.y = 300;
+	s.centr.z = 50;
+
+	cam.x = 450;
+	cam.y = 300;
+	cam.z = -100;
+
+	r.a = cam;
+	r.b.z = 1;
+
+	p.colr.val = 0;
+	p.y = 0;
+	while (p.y < w->img.h)
+	{
+		p.x = 0;
+		while (p.x < w->img.w)
+		{
+
+			r.b.x = p.x;// - cam.x;
+			r.b.y = p.y;// - cam.y;
+			r.b.z = 50;// - cam.z;
+			r.b = v_sub(r.b, cam);
+			r.b = v_normalise(r.b);
+
+			if(p.x == 450 && p.y == 300)
+				printf("test");
+			p.colr.chnl.g = ft_colrlim(rt_sphere_intersect( &r, (void*)&s));
+//			if (rt_sphere_intersect( &r, (void*)&s) > 0)
+//				p.colr.chnl.g = 250;
+			ft_pixtoimg(&w->img, &p);
+			p.x++;
+		}
+		p.y++;
+	}
+
+	ft_drawimg(w);
+
+	ft_keyhookloop(w, 0);
+}
+
 int main()
 {
-	t_vec a;
-	t_vec b;
 
-	a.x = 1;
-	a.y = 23.124;
-	a.z = 5.55;
-
-	b.x = 2;
-	b.y = 30.124;
-	b.z = 6.55;
-
-	t_vec *z = ft_memalloc(sizeof(t_vec));
-	*z = v_add(a, b);
-
-
-	print_v(&a);
-	print_v(&b);
-
+	test_rt();
     //printf(">%10f %10f %10f", ss->b.x, ss->b.y, ss->b.z);
     return 0;
 }

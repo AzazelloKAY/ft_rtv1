@@ -6,7 +6,7 @@
 /*   By: akokoshk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 20:46:57 by akokoshk          #+#    #+#             */
-/*   Updated: 2018/03/17 21:59:21 by akokoshk         ###   ########.fr       */
+/*   Updated: 2018/03/18 16:56:11 by akokoshk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,11 @@ typedef struct		s_obj
 	//int (*test_intersect)(void *obj, t_point r_start, t_vec ray, t_point *cross_p);
 
 }					t_obj;
+
+/*
+*** rt_sphere.c
+*/
+
+double		rt_sphere_intersect(t_ray *r, void *obj);
 
 #endif

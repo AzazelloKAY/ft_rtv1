@@ -6,7 +6,7 @@
 /*   By: akokoshk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/17 15:33:09 by akokoshk          #+#    #+#             */
-/*   Updated: 2018/03/17 21:18:28 by akokoshk         ###   ########.fr       */
+/*   Updated: 2018/03/18 18:09:41 by akokoshk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,26 +68,25 @@ t_vec		v_normalise(t_vec a)
 	return (res);
 }
 
-double		quad_equ_des(double a, double b, double c)
+double		quad_equ_d(double a, double b, double c)
 {
 	return ((b * b) - (4 * a * c));
 }
 
-t_vec2		quad_equ(double a, double b, double c)
+double		v_quad_equ(double a, double b, double c)
 {
 	double	d;
 	t_vec2	res;
 
-	d = quad_equ_des(a, b, c);
-	if (d < 0)
+	d = quad_equ_d(a, b, c);
+	if (d >= 0)
 	{
-		res.x = NAN;
-		res.y = NAN;
+		res.x = (-b + sqrt(d)) / (2.0 * a);
+		res.y = (-b - sqrt(d)) / (2.0 * a);
+		((res.x >= 0) ? (d = res.x) : (d = -1));
+		((res.y >= 0 && res.y < d) ? (d = res.y) : 0);
+		if (d >= 0)
+			return (d);
 	}
-	else
-	{
-		res.x = (-b + sqrt(d)) / (2 * a);
-		res.y = (-b - sqrt(d)) / (2 * a);
-	}
-	return (res);
+	return (-1);
 }

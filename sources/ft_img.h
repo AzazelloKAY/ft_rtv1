@@ -6,7 +6,7 @@
 /*   By: akokoshk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/17 21:19:45 by akokoshk          #+#    #+#             */
-/*   Updated: 2018/03/17 21:52:58 by akokoshk         ###   ########.fr       */
+/*   Updated: 2018/03/18 16:50:39 by akokoshk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ typedef struct		s_win
 */
 
 void			ft_pixtoimg(t_img *i, t_point *p);
-
 void			ft_drawimg(t_win *w);
+unsigned int 	ft_colrlim(double c);
 
 /*
 *** ft_img_init_destr.c
@@ -76,5 +76,13 @@ void			ft_drawimg(t_win *w);
 
 t_win			*ft_init_mlx(char *name);
 int				ft_init_img(t_win *w);
+void			ft_destroy_all(t_win *w);
+int				ft_exit_x(t_win *w);
+
+/*
+*** ft_img_keyhook.c
+*/
+
+void			ft_keyhookloop(t_win *w, void *dat);
 
 #endif

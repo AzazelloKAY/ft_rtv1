@@ -6,14 +6,14 @@
 /*   By: akokoshk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 21:19:30 by akokoshk          #+#    #+#             */
-/*   Updated: 2018/03/17 20:56:42 by akokoshk         ###   ########.fr       */
+/*   Updated: 2018/03/18 18:09:41 by akokoshk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_rtv1.h"
 
 
-int		rt_sphere_intersect(t_ray *r, void *obj)
+double		rt_sphere_intersect(t_ray *r, void *obj)
 {
 	double		a;
 	double		b;
@@ -24,12 +24,13 @@ int		rt_sphere_intersect(t_ray *r, void *obj)
 	s = (t_sphere*)obj;
 	a = v_mul_s(r->b, r->b);
 	len = v_sub(r->a, s->centr);
-	b = 2 * v_mul_s(r->b, len);
+	b = 2.0 * v_mul_s(r->b, len);
 	c = v_mul_s(len, len) - (s->radius * s->radius);
-	if (quad_equ_des(a, b, c) < 0)
-		return (0);
-	else
-		return (1);
+//	if (quad_equ(a, b, c) == NAN)
+//		return (0);
+//	else
+//		return (1);
+	return (v_quad_equ(a, b, c));
 }
 
 

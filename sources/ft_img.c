@@ -6,7 +6,7 @@
 /*   By: akokoshk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/17 21:35:47 by akokoshk          #+#    #+#             */
-/*   Updated: 2018/03/17 22:03:47 by akokoshk         ###   ########.fr       */
+/*   Updated: 2018/03/18 17:07:19 by akokoshk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,20 @@ void			ft_drawimg(t_win *w)
 {
 	mlx_clear_window(w->mlx, w->win);
 	mlx_put_image_to_window(w->mlx, w->win, w->img.ptr, 0, 0);
-	ft_writhelp(w);
+	//ft_writhelp(w);
 }
 
-int				ft_exit_x(t_win *w, void *dat)
+unsigned int 	ft_colrlim(double c)
 {
-	if (w->img.ptr)
-		mlx_destroy_image(w->mlx, w->img.ptr);
-	mlx_destroy_window(w->mlx, w->win);
+	unsigned int t;
 
-//	ft_destroy_all(dat);
-
-
-//	if (f->fract != NULL)
-//		free(f->fract);
-//	if (f != NULL)
-//		free(f);
-	exit(0);
+	if (c < 0 || c == NAN)
+		return (0);
+	if (c == INFINITY)
+		return (255);
+	t = (unsigned int)c;
+	return (t % 255);
 }
+
+
+

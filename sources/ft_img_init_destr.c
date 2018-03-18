@@ -6,7 +6,7 @@
 /*   By: akokoshk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/17 22:00:34 by akokoshk          #+#    #+#             */
-/*   Updated: 2018/03/17 22:04:16 by akokoshk         ###   ########.fr       */
+/*   Updated: 2018/03/18 16:32:54 by akokoshk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,22 @@ int				ft_init_img(t_win *w)
 	w->img.size_line = sizeof(int) * w->img.w;
 	w->img.endian = 0;
 	if (!(w->img.str = (uint32_t*)mlx_get_data_addr(w->img.ptr,
-													&(w->img.bitperpix), &(w->img.size_line), &(w->img.endian))))
+		&(w->img.bitperpix), &(w->img.size_line), &(w->img.endian))))
 		return (1);
 	return (0);
 }
 
-void			ft_destroy_all(void *dat)
+void			ft_destroy_all(t_win *w)
 {
-
+	if (w->img.ptr)
+		mlx_destroy_image(w->mlx, w->img.ptr);
+	mlx_destroy_window(w->mlx, w->win);
 }
+
+int				ft_exit_x(t_win *w)
+{
+	ft_destroy_all(w);
+	exit(0);
+}
+
 

@@ -6,7 +6,7 @@
 /*   By: akokoshk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/17 21:09:32 by akokoshk          #+#    #+#             */
-/*   Updated: 2018/03/17 21:27:17 by akokoshk         ###   ########.fr       */
+/*   Updated: 2018/03/18 16:41:05 by akokoshk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_vec		v_mul_scal(t_vec a, double b);
 
 double 		v_len(t_vec a, t_vec b);
 t_vec		v_normalise(t_vec a);
-double		quad_equ_des(double a, double b, double c);
-t_vec2		quad_equ(double a, double b, double c);
+double		quad_equ_d(double a, double b, double c);
+double		v_quad_equ(double a, double b, double c);
 
 #endif

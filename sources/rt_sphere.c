@@ -33,6 +33,19 @@ double		rt_sphere_intersect(t_ray *r, void *obj)
 	return (v_quad_equ(a, b, c));
 }
 
+t_sphere	*rt_new_sphere(double r, double x, double y, double z)
+{
+	t_sphere *s;
+
+	if (!(s = ft_memalloc(sizeof(t_sphere))))
+		return (NULL);
+	s->radius = r;
+	s->centr.x = x;
+	s->centr.y = y;
+	s->centr.z = z;
+	return (s);
+}
+
 
 
 

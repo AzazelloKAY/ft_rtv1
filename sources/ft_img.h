@@ -6,7 +6,7 @@
 /*   By: akokoshk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/17 21:19:45 by akokoshk          #+#    #+#             */
-/*   Updated: 2018/03/18 16:50:39 by akokoshk         ###   ########.fr       */
+/*   Updated: 2018/03/19 22:05:40 by akokoshk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,10 @@ typedef struct		s_img
 	int			endian;
 	int			h;
 	int			w;
+	int			minh;
+	int			maxh;
+	int			minw;
+	int			maxw;
 }					t_img;
 
 typedef struct		s_win
@@ -75,6 +79,7 @@ unsigned int 	ft_colrlim(double c);
 */
 
 t_win			*ft_init_mlx(char *name);
+int				fr_remake_img(t_win *w);
 int				ft_init_img(t_win *w);
 void			ft_destroy_all(t_win *w);
 int				ft_exit_x(t_win *w);

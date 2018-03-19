@@ -6,7 +6,7 @@
 /*   By: akokoshk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/17 21:09:32 by akokoshk          #+#    #+#             */
-/*   Updated: 2018/03/18 16:41:05 by akokoshk         ###   ########.fr       */
+/*   Updated: 2018/03/19 20:48:31 by akokoshk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,16 @@ typedef struct		s_ray
 	t_vec b;
 }					t_ray;
 
+typedef struct		s_cam
+{
+	t_vec	orig;
+	double	ax;
+	double	ay;
+	double	az;
+	double	fov;
+
+
+}					t_cam;
 
 /*
 ** vc_vector_func1.c

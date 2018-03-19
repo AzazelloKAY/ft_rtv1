@@ -6,7 +6,7 @@
 /*   By: akokoshk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 20:42:53 by akokoshk          #+#    #+#             */
-/*   Updated: 2018/03/18 19:59:47 by akokoshk         ###   ########.fr       */
+/*   Updated: 2018/03/19 19:40:41 by akokoshk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,16 @@ void	print_v(t_vec *a)
 }
 
 
-void 	test_rt()
+void 	test_rtv1(t_obj *o)
 {
-	t_win *w;
-	t_sphere s;
+	t_win	*w;
 	t_point p;
 	t_vec	cam;
 	t_ray	r;
 
-	int i, j, k;
-
 	w = ft_init_mlx("test rtv");
 	ft_init_img(w);
 
-	s.radius = 100;
-	s.centr.x = 450;
-	s.centr.y = 300;
-	s.centr.z = 50;
 
 	cam.x = 450;
 	cam.y = 300;
@@ -61,7 +54,7 @@ void 	test_rt()
 
 			if(p.x == 450 && p.y == 300)
 				printf("test");
-			p.colr.chnl.g = ft_colrlim(rt_sphere_intersect( &r, (void*)&s));
+			p.colr.chnl.g = ft_colrlim(o->intersect(&r, o->obj));
 //			if (rt_sphere_intersect( &r, (void*)&s) > 0)
 //				p.colr.chnl.g = 250;
 			ft_pixtoimg(&w->img, &p);
@@ -77,8 +70,17 @@ void 	test_rt()
 
 int main()
 {
+	t_obj		o;
+	t_sphere	*s;
 
-	test_rt();
+	s = rt_new_sphere(100, 450, 300, 50);
+
+	o.colr.val = 0xFF00;
+	o.intersect = rt_sphere_intersect;
+	o.obj = (void*)s;
+
+
+	test_rtv1(&o);
     //printf(">%10f %10f %10f", ss->b.x, ss->b.y, ss->b.z);
     return 0;
 }

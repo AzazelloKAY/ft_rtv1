@@ -71,6 +71,7 @@ typedef struct		s_win
 */
 
 void			ft_pixtoimg(t_img *i, t_point *p);
+void			ft_pixtoimg_shift(t_img *i, t_point *p);
 void			ft_drawimg(t_win *w);
 unsigned int 	ft_colrlim(double c);
 

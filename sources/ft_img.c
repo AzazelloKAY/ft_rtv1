@@ -6,7 +6,7 @@
 /*   By: akokoshk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/17 21:35:47 by akokoshk          #+#    #+#             */
-/*   Updated: 2018/03/19 22:19:36 by akokoshk         ###   ########.fr       */
+/*   Updated: 2018/03/20 20:33:29 by akokoshk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void			ft_pixtoimg(t_img *i, t_point *p)
 	i->str[((i->w * p->y) + p->x)] = p->colr.val;
 }
 
-void			ft_pixtoimg_(t_img *i, t_point *p)
+void			ft_pixtoimg_shift(t_img *i, t_point *p)
 {
 	i->str[((i->w * (i->maxh - p->y)) + (p->x + i->maxw))] = p->colr.val;
 }
@@ -58,7 +58,7 @@ unsigned int 	ft_colrlim(double c)
 {
 	unsigned int t;
 
-	if (c < 0 || c == NAN)
+	if (c < 1 || c == NAN)
 		return (0);
 	if (c == INFINITY)
 		return (255);

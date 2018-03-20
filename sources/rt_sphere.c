@@ -6,7 +6,7 @@
 /*   By: akokoshk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 21:19:30 by akokoshk          #+#    #+#             */
-/*   Updated: 2018/03/18 18:09:41 by akokoshk         ###   ########.fr       */
+/*   Updated: 2018/03/20 20:49:16 by akokoshk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,23 @@
 
 double		rt_sphere_intersect(t_ray *r, void *obj)
 {
-	double		a;
-	double		b;
-	double		c;
+	t_vec		qabc;
 	t_sphere	*s;
 	t_vec		len;
 
 	s = (t_sphere*)obj;
-	a = v_mul_s(r->b, r->b);
+	qabc.x = v_mul_s(r->b, r->b);
 	len = v_sub(r->a, s->centr);
-	b = 2.0 * v_mul_s(r->b, len);
-	c = v_mul_s(len, len) - (s->radius * s->radius);
+	qabc.y = 2.0 * v_mul_s(r->b, len);
+	qabc.z = v_mul_s(len, len) - (s->radius * s->radius);
 //	if (quad_equ(a, b, c) == NAN)
 //		return (0);
 //	else
 //		return (1);
-	return (v_quad_equ(a, b, c));
+	return (v_quad_equ(qabc.x, qabc.y, qabc.z, 0));
 }
 
-t_sphere	*rt_new_sphere(double r, double x, double y, double z)
+t_sphere	*rt_new_sphere(double x, double y, double z, double r)
 {
 	t_sphere *s;
 
@@ -46,6 +44,103 @@ t_sphere	*rt_new_sphere(double r, double x, double y, double z)
 	return (s);
 }
 
+
+//TEST
+
+void 	test_rtv1(t_obj *o)
+{
+	t_win	*w;
+	t_point p;
+	t_vec	cam;
+	t_ray	r;
+
+	w = ft_init_mlx("test rtv");
+	ft_init_img(w);
+
+
+	cam.x = 450;
+	cam.y = 300;
+	cam.z = -100;
+
+	r.a = cam;
+	r.b.z = 1;
+
+	p.colr.val = 0;
+	p.y = 0;
+	while (p.y < w->img.h)
+	{
+		p.x = 0;
+		while (p.x < w->img.w)
+		{
+
+			r.b.x = p.x;// - cam.x;
+			r.b.y = p.y;// - cam.y;
+			r.b.z = 50;// - cam.z;
+			r.b = v_sub(r.b, cam);
+			r.b = v_normalise(r.b);
+
+			if(p.x == 450 && p.y == 300)
+				printf("test");
+			p.colr.chnl.g = ft_colrlim(o->intersect(&r, o->obj));
+//			if (rt_sphere_intersect( &r, (void*)&s) > 0)
+//				p.colr.chnl.g = 250;
+			ft_pixtoimg(&w->img, &p);
+			p.x++;
+		}
+		p.y++;
+	}
+
+	ft_drawimg(w);
+
+	ft_keyhookloop(w, 0);
+}
+
+void 	test_rtv2(t_obj *o)
+{
+	t_win	*w;
+	t_point p;
+	t_vec	cam;
+	t_ray	r;
+
+	w = ft_init_mlx("test rtv");
+	ft_init_img(w);
+
+
+	cam.x = 450;
+	cam.y = 300;
+	cam.z = -100;
+
+	r.a = cam;
+	r.b.z = 1;
+
+	p.colr.val = 0;
+	p.y = 0;
+	while (p.y < w->img.h)
+	{
+		p.x = 0;
+		while (p.x < w->img.w)
+		{
+
+			r.b.x = p.x;// - cam.x;
+			r.b.y = p.y;// - cam.y;
+			r.b.z = 50;// - cam.z;
+			r.b = v_sub(r.b, cam);
+			r.b = v_normalise(r.b);
+
+			if(p.x == 450 && p.y == 300)
+				printf("test");
+			p.colr.chnl.g = ft_colrlim(o->intersect(&r, o->obj));
+
+			ft_pixtoimg(&w->img, &p);
+			p.x++;
+		}
+		p.y++;
+	}
+
+	ft_drawimg(w);
+
+	ft_keyhookloop(w, 0);
+}
 
 
 

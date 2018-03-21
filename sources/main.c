@@ -6,7 +6,7 @@
 /*   By: akokoshk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 20:42:53 by akokoshk          #+#    #+#             */
-/*   Updated: 2018/03/21 22:18:13 by akokoshk         ###   ########.fr       */
+/*   Updated: 2018/03/21 22:44:08 by akokoshk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,16 @@ int main()
 	ft_init_img(w);
 	c = cam_new(0, 0, -1);
 	o = rt_new_obj_arr(2);
+
+
+	//rt_sphr_obj(o->obj[0], )
 	o->obj[0].colr.val = 0xFF00;
 	o->obj[0].intersect = rt_sphere_intersect;
-	o->obj[0].objp = rt_new_sphere(10, 0, 70, 40);
+	o->obj[0].objp = rt_new_sphr(10, 0, 70, 40);
 
 	o->obj[1].colr.val = 0xFF0000;
 	o->obj[1].intersect = rt_sphere_intersect;
-	o->obj[1].objp = rt_new_sphere(-50, 0, 150, 50);
+	o->obj[1].objp = rt_new_sphr(-50, 0, 150, 50);
 
 	rt_calc_scren(w, c, o);
 

@@ -6,7 +6,7 @@
 /*   By: akokoshk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 20:46:57 by akokoshk          #+#    #+#             */
-/*   Updated: 2018/03/21 20:36:18 by akokoshk         ###   ########.fr       */
+/*   Updated: 2018/03/21 21:37:22 by akokoshk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ typedef struct		s_objarr
 */
 
 int					rt_sphere_intersect(t_ray *r, void *obj, void *res);
-t_sphere			*rt_new_sphere(double x, double y, double z, double r);
+t_sphere			*rt_new_sphr(double x, double y, double z, double r);
+void 				rt_sphr_obj(t_obj *o, t_vec cntr, double r, uint32_t colr);
 
 //TEST
 //void 	test_rtv1(t_obj *o);

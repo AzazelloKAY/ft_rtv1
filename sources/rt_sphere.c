@@ -6,7 +6,7 @@
 /*   By: akokoshk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 21:19:30 by akokoshk          #+#    #+#             */
-/*   Updated: 2018/03/21 19:58:32 by akokoshk         ###   ########.fr       */
+/*   Updated: 2018/03/21 22:44:08 by akokoshk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		rt_sphere_intersect(t_ray *r, void *obj, void *res)
 		return (0);
 }
 
-t_sphere	*rt_new_sphere(double x, double y, double z, double r)
+t_sphere	*rt_new_sphr(double x, double y, double z, double r)
 {
 	t_sphere *s;
 
@@ -47,6 +47,12 @@ t_sphere	*rt_new_sphere(double x, double y, double z, double r)
 	return (s);
 }
 
+void 		rt_sphr_obj(t_obj *o, t_vec cntr, double r, uint32_t colr)
+{
+	o->colr.val = colr;
+	o->intersect = rt_sphere_intersect;
+	o->objp = rt_new_sphr(cntr.x, cntr.y, cntr.z, r);
+}
 
 //TEST SHITTT
 //

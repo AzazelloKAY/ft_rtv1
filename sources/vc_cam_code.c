@@ -6,7 +6,7 @@
 /*   By: akokoshk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 20:39:07 by akokoshk          #+#    #+#             */
-/*   Updated: 2018/03/20 22:13:27 by akokoshk         ###   ########.fr       */
+/*   Updated: 2018/03/21 19:59:22 by akokoshk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,17 @@ t_cam	*cam_new(double x, double y, double z)
 	c->orig.z = z;
 	c->fov = 70;
 	c->vh = 1;
-	c->vw = 1;
+	c->vw = 1.5;
 	c->tmin = 0;
 	c->tmax = INFINITY;
 
 	return (c);
 }
+
+
+/*
+** Depricated
+*/
 
 t_vec	vc_prim_ray(t_cam *c, int x, int y, t_vec img)
 {
@@ -49,20 +54,4 @@ t_vec	vc_prim_ray(t_cam *c, int x, int y, t_vec img)
 	vDir = v_normalise(vDir); // it's a direction so don't forget to normalize
 	return (vDir);
 }
-
-///*
-//*** viewpoint
-//*/
-//
-//t_vec	vc_vp_ray(int x, int y, int z)
-//{
-//	t_vec v;
-//	double vy;
-//
-//	v.x = x * (c->vw / img.x);
-//	v.y = y * (c->vh / img.y);
-//	v.z = z;
-//}
-
-
 

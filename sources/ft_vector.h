@@ -64,7 +64,7 @@ t_vec		v_mul_scal(t_vec a, double b);
 double 		v_len(t_vec a, t_vec b);
 t_vec		v_normalise(t_vec a);
 double		quad_equ_d(double a, double b, double c);
-double		v_quad_equ(double a, double b, double c, t_vec2 *res);
+int			v_quad_equ(double a, double b, double c, t_vec2 *res);
 
 
 /*

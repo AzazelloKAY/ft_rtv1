@@ -6,7 +6,7 @@
 /*   By: akokoshk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/17 15:33:09 by akokoshk          #+#    #+#             */
-/*   Updated: 2018/03/20 20:21:15 by akokoshk         ###   ########.fr       */
+/*   Updated: 2018/03/21 20:07:23 by akokoshk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,22 +73,20 @@ double		quad_equ_d(double a, double b, double c)
 	return ((b * b) - (4 * a * c));
 }
 
-double		v_quad_equ(double a, double b, double c, t_vec2 *res)
+int		v_quad_equ(double a, double b, double c, t_vec2 *res)
 {
 	double	d;
 	t_vec2	re;
 
 	d = quad_equ_d(a, b, c);
-	if (d >= 0)
-	{
-		re.x = (-b + sqrt(d)) / (2.0 * a);
-		re.y = (-b - sqrt(d)) / (2.0 * a);
-		((re.x >= 0) ? (d = re.x) : (d = -1));
-		((re.y >= 0 && re.y < d) ? (d = re.y) : 0);
-		if (res != NULL)
-			*res = re;
-		if (d >= 0)
-			return (d);
-	}
-	return (-1);
+	if (d < 0)
+		return (0);
+	re.x = (-b + sqrt(d)) / (2.0 * a);
+	re.y = (-b - sqrt(d)) / (2.0 * a);
+	if (res != NULL)
+		*res = re;
+	return (1);
 }
+
+//		((re.x >= 0) ? (d = re.x) : (d = -1));
+//		((re.y >= 0 && re.y < d) ? (d = re.y) : 0);

@@ -6,11 +6,9 @@
 /*   By: akokoshk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 20:42:53 by akokoshk          #+#    #+#             */
-/*   Updated: 2018/03/20 22:21:36 by akokoshk         ###   ########.fr       */
+/*   Updated: 2018/03/21 22:18:13 by akokoshk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #include "ft_rtv1.h"
 
@@ -23,101 +21,30 @@ void	print_v(t_vec *a)
 *** viewpoint
 */
 
-t_vec	canv_to_vp(t_vec point, t_img *i, t_cam *c)
-{
-	t_vec v;
 
-	v.x = point.x * (c->vw / i->w);
-	v.y = point.y * (c->vh / i->h);
-	v.z = point.z;
-	return (v);
-}
-
-t_color	rayTrace(t_ray *r, t_obj *o, int objNum)
-{
-	t_color	c;
-	double	closest_t;
-	double	cur_t;
-	t_obj	*closest_o;
-
-	c.val = 0;
-	closest_t = INFINITY;
-	closest_o = NULL;
-	while (objNum--)										//ВАЖНО ПРАВИЛЬНО СОЗДАВАТЬ МАССИВ ОБЪЕКТОВ, ЛИБО ДОП ПЕРЕДАВАТЬ К_во
-	{
-		cur_t = o->intersect(r, o[objNum].obj);			//ТУТ ДОЛЖНО ВОЗВРАЩАТЬ ДВА ЗНАЧЕНИЯ
-		if (cur_t > 0)
-			printf("visable %10f\n", cur_t);
-
-
-		if (cur_t >= 0 && cur_t < closest_t)
-		{
-			closest_t = cur_t;
-			closest_o = &o[objNum];
-		}
-	}
-	if (closest_o != NULL)
-	{
-		c = closest_o->colr;
-		printf("r = %10f g = %10f b = %10f\n", c.chnl.r, c.chnl.g, c.chnl.b);
-	}
-	return (c);
-}
-
-void	ft_calc_scren(t_win	*w, t_obj *o, t_cam *c)
-{
-	t_point	p;
-	t_ray	ray;
-
-	ray.a = c->orig;
-	p.y = w->img.maxh;
-	while (p.y > w->img.minh)
-	{
-		p.x = w->img.minw;
-		while (p.x < w->img.maxw)
-		{
-			//while (o != NULL) { o++; }
-
-			ray.b.x = p.x;// - cam.x;
-			ray.b.y = p.y;// - cam.y;
-			ray.b.z = 1;// - cam.z;
-
-			ray.b = canv_to_vp(ray.b, &w->img, c);
-
-			ray.b = v_sub(ray.b, c->orig);	//?
-			ray.b = v_normalise(ray.b);		//?
-
-			p.colr = rayTrace(&ray, o, 1);
-
-			ft_pixtoimg_shift(&w->img, &p);
-
-
-			p.x++;
-		}
-		p.y--;
-	}
-}
 
 
 int main()
 {
 	//test_rtv1(&o);
 
-
-
-	t_obj		*o;
+	t_objarr	*o;
 	t_win		*w;
 	t_cam		*c;
 
 	w = ft_init_mlx("test rtv");
 	ft_init_img(w);
 	c = cam_new(0, 0, -1);
-	o = rt_obj_new(2);
-	o[0].colr.val = 0xFF00;
-	o[0].intersect = rt_sphere_intersect;
-	o[0].obj = (void*)rt_new_sphere(0, 0, 1000, 20);
+	o = rt_new_obj_arr(2);
+	o->obj[0].colr.val = 0xFF00;
+	o->obj[0].intersect = rt_sphere_intersect;
+	o->obj[0].objp = rt_new_sphere(10, 0, 70, 40);
 
-	ft_calc_scren(w, o, c);
+	o->obj[1].colr.val = 0xFF0000;
+	o->obj[1].intersect = rt_sphere_intersect;
+	o->obj[1].objp = rt_new_sphere(-50, 0, 150, 50);
+
+	rt_calc_scren(w, c, o);
 
 	ft_drawimg(w);
 

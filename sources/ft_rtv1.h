@@ -34,6 +34,12 @@ typedef struct 		s_sphere
 	double	radius;
 }					t_sphere;
 
+typedef struct 		s_light
+{
+	t_vec	centr;
+	t_color	colr;
+}					t_light;
+
 typedef struct		s_obj
 {
 	void	*objp;

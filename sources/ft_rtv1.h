@@ -6,7 +6,7 @@
 /*   By: akokoshk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 20:46:57 by akokoshk          #+#    #+#             */
-/*   Updated: 2018/03/21 21:37:22 by akokoshk         ###   ########.fr       */
+/*   Updated: 2018/03/23 21:57:06 by akokoshk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,30 @@ typedef struct 		s_sphere
 	t_vec	centr;
 	double	radius;
 }					t_sphere;
+
+typedef struct 		s_plane
+{
+	t_vec	c;
+	t_vec	n;
+}					t_plane;
+
+typedef struct 		s_cylinder
+{
+	t_vec	c;
+	t_vec	v;
+	double	radius;
+	double	len; //maxm
+}					t_cylinder;
+
+typedef struct 		s_cone
+{
+	t_vec	c;
+	t_vec	v;
+	double	k;
+	double	minm;
+	double	maxm;
+
+}					t_cone;
 
 typedef struct 		s_light
 {
@@ -61,6 +85,14 @@ typedef struct		s_objarr
 int					rt_sphere_intersect(t_ray *r, void *obj, void *res);
 t_sphere			*rt_new_sphr(double x, double y, double z, double r);
 void 				rt_sphr_obj(t_obj *o, t_vec cntr, double r, uint32_t colr);
+
+/*
+*** rt_o_plane.c
+*/
+
+int					rt_plane_intersect(t_ray *r, void *obj, void *res);
+t_plane				*rt_new_plane(double x, double y, double z, t_vec n);
+//void 				rt_plane_obj(t_obj *o, t_vec c, t_vec n, uint32_t colr);
 
 //TEST
 //void 	test_rtv1(t_obj *o);

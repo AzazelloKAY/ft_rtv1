@@ -6,7 +6,7 @@
 /*   By: akokoshk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 20:11:50 by akokoshk          #+#    #+#             */
-/*   Updated: 2018/03/21 22:13:00 by akokoshk         ###   ########.fr       */
+/*   Updated: 2018/03/23 21:08:34 by akokoshk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static t_vec		canv_to_vp(t_vec point, t_img *i, t_cam *c)
 	return (v);
 }
 
-static t_color		rayTrace(t_ray *r, t_objarr *o)
+static t_color		ray_trace(t_ray *r, t_objarr *o)
 {
 	t_color	c;
 	double	closest_t;
@@ -67,9 +67,6 @@ void				rt_calc_scren(t_win	*w, t_cam *c, t_objarr *o)
 		p.x = w->img.minw;
 		while (p.x < w->img.maxw)
 		{
-			//printf("y = %6d x = %6d\n", p.y, p.x);
-
-
 			ray.b.x = p.x;
 			ray.b.y = p.y;
 			ray.b.z = c->orig.z + 1;		//distance to camera // calculate it
@@ -78,7 +75,7 @@ void				rt_calc_scren(t_win	*w, t_cam *c, t_objarr *o)
 			ray.b = v_sub(ray.b, c->orig);	//?
 			ray.b = v_normalise(ray.b);		//?
 
-			p.colr = rayTrace(&ray, o);
+			p.colr = ray_trace(&ray, o);
 
 			ft_pixtoimg_shift(&w->img, &p);
 			p.x++;

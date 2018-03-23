@@ -6,29 +6,11 @@
 /*   By: akokoshk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/17 15:33:09 by akokoshk          #+#    #+#             */
-/*   Updated: 2018/03/21 20:07:23 by akokoshk         ###   ########.fr       */
+/*   Updated: 2018/03/23 19:58:26 by akokoshk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_vector.h"
-
-//t_vec		vec_add(t_vec *a, t_vec *b)
-//{
-//	t_vec res;
-//
-//	res.a = point_add(a->a, b->a);
-//	res.b = point_add(a->b, b->b);
-//	return (res);
-//}
-//
-//t_vec		vec_sub(t_vec *a, t_vec *b)
-//{
-//	t_vec res;
-//
-//	res.a = point_sub(a->a, b->a);
-//	res.b = point_sub(a->b, b->b);
-//	return (res);
-//}
 
 t_vec		*v_new(t_vec *v)
 {
@@ -73,7 +55,7 @@ double		quad_equ_d(double a, double b, double c)
 	return ((b * b) - (4 * a * c));
 }
 
-int		v_quad_equ(double a, double b, double c, t_vec2 *res)
+int			v_quad_equ(double a, double b, double c, t_vec2 *res)
 {
 	double	d;
 	t_vec2	re;

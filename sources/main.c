@@ -38,30 +38,20 @@ int main()
 	o = rt_new_obj_arr(4);
 
 
-	//rt_sphr_obj(o->obj[0], )
-	o->obj[0].colr.val = 0xFF00;
-	o->obj[0].intersect = rt_sphere_intersect;
-	o->obj[0].objp = rt_new_sphr(10, 0, 149, 40);
-
-	o->obj[1].colr.val = 0xFF0000;
-	o->obj[1].intersect = rt_sphere_intersect;
-	o->obj[1].objp = rt_new_sphr(-50, 0, 150, 50);
-
+    rt_sphr_obj(&o->obj[0], rt_new_sphr(10, 0, 536, 70), 0xFF00);
+	rt_sphr_obj(&o->obj[1], rt_new_sphr(-50, 0, 550, 80), 0xFF0000);
 
 	t_vec n;
-	n.x = 30;
+	n.x = 301;
 	n.y = 0;
 	n.z = 0;
-	o->obj[2].colr.val = 0xFFFF00;
-	o->obj[2].intersect = rt_plane_intersect;
-	o->obj[2].objp = rt_new_plane(29, 0, 0, n);
+	rt_plane_obj(&o->obj[2], rt_new_plane(50, 0, 0, n), 0xFFFF00);
 
-    n.x = -30;
+    n.x = -301;
     n.y = 0;
     n.z = 0;
-    o->obj[3].colr.val = 0xF0F0F0;
-    o->obj[3].intersect = rt_plane_intersect;
-    o->obj[3].objp = rt_new_plane(-60, 0, 0, n);
+	rt_plane_obj(&o->obj[3], rt_new_plane(-300, 0, 0, n), 0xF0F0F0);
+
 
 
 

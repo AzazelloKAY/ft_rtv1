@@ -44,8 +44,8 @@ typedef struct 		s_cylinder
 {
 	t_vec	c;
 	t_vec	v;
-	double	radius;
-	double	len; //maxm
+	double	rad;
+	double	maxm;
 }					t_cylinder;
 
 typedef struct 		s_cone
@@ -84,7 +84,7 @@ typedef struct		s_objarr
 
 t_xy				rt_sphere_intersect(t_ray *r, void *obj);
 t_sphere			*rt_new_sphr(double x, double y, double z, double r);
-void 				rt_sphr_obj(t_obj *o, t_vec cntr, double r, uint32_t colr);
+void 				rt_sphr_obj(t_obj *o, t_sphere *s, uint32_t colr);
 
 /*
 *** rt_o_plane.c
@@ -92,7 +92,7 @@ void 				rt_sphr_obj(t_obj *o, t_vec cntr, double r, uint32_t colr);
 
 t_xy				rt_plane_intersect(t_ray *r, void *obj);
 t_plane				*rt_new_plane(double x, double y, double z, t_vec n);
-//void 				rt_plane_obj(t_obj *o, t_vec c, t_vec n, uint32_t colr);
+void				rt_plane_obj(t_obj *o, t_plane *p, uint32_t colr);
 
 //TEST
 //void 	test_rtv1(t_obj *o);

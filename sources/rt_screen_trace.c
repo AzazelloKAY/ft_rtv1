@@ -39,6 +39,7 @@ static t_color		ray_trace(t_ray *r, t_objarr *o)
         t = o->obj[i].intersect(r, o->obj[i].objp);
 		if (t.x < 0 && t.y < 0)
 			continue ;
+
 		if (t.x >= 0 && t.x < closest_t)
 		{
 			closest_t = t.x;
@@ -49,6 +50,7 @@ static t_color		ray_trace(t_ray *r, t_objarr *o)
             closest_t = t.y;
             closest_o = &o->obj[i];
         }
+
 	}
 	((closest_o != NULL) ? (c.val = closest_o->colr.val) : 0);
 	return (c);

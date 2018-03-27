@@ -6,7 +6,7 @@
 /*   By: akokoshk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 20:11:50 by akokoshk          #+#    #+#             */
-/*   Updated: 2018/03/23 21:08:34 by akokoshk         ###   ########.fr       */
+/*   Updated: 2018/03/26 19:29:27 by akokoshk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ static t_vec		canv_to_vp(t_vec point, t_img *i, t_cam *c)
 static t_color		ray_trace(t_ray *r, t_objarr *o)
 {
 	t_color	c;
+	int 	i;
+    t_xy	t;
 	double	closest_t;
 	t_obj	*closest_o;
-	t_vec2	qres;
-	int 	i;
 
 	c.val = 0;
 	closest_t = INFINITY;
@@ -36,18 +36,19 @@ static t_color		ray_trace(t_ray *r, t_objarr *o)
 	i = o->objnum;
 	while (i--)
 	{
-		if (o->obj[i].intersect(r, o->obj[i].objp, &qres) == 0)
+        t = o->obj[i].intersect(r, o->obj[i].objp);
+		if (t.x < 0 && t.y < 0)
 			continue ;
-		if (qres.x >= 0 && qres.x < closest_t)
+		if (t.x >= 0 && t.x < closest_t)
 		{
-			closest_t = qres.x;
+			closest_t = t.x;
 			closest_o = &o->obj[i];
 		}
-		if (qres.y >= 0 && qres.y < closest_t)
-		{
-			closest_t = qres.y;
-			closest_o = &o->obj[i];
-		}
+        if (t.y >= 0 && t.y < closest_t)
+        {
+            closest_t = t.y;
+            closest_o = &o->obj[i];
+        }
 	}
 	((closest_o != NULL) ? (c.val = closest_o->colr.val) : 0);
 	return (c);

@@ -6,35 +6,36 @@
 /*   By: akokoshk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 21:18:03 by akokoshk          #+#    #+#             */
-/*   Updated: 2018/03/23 21:45:14 by akokoshk         ###   ########.fr       */
+/*   Updated: 2018/03/26 19:45:22 by akokoshk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_rtv1.h"
 
 
-int			rt_plane_intersect(t_ray *r, void *obj, void *res)
+t_xy		rt_plane_intersect(t_ray *r, void *obj)
 {
 	t_plane		*p;
-	double		numerator;
-	double		denominator;
-	double		t;
+	double		a;
+	double		b;
+    t_xy		res;
 
 	p = (t_plane*)obj;
-//	numerator = v_mul_s(v_sub(p->c, r->a), p->n);
-//	denominator = v_mul_s(r->b, p->n);
+    res.x = -1;
+    res.y = -1;
+//	a = v_dotprod(v_sub(p->o, r->a), p->n); //праволево
+//	b = v_dotprod(r->b, p->n);
 
-	numerator = v_mul_s(p->n, r->b) - v_mul_s(p->n, p->c);
-	denominator = v_mul_s(p->n, r->b);
+	a = v_dotprod(p->n, v_sub(r->a, p->o));
+	b = v_dotprod(p->n, r->b);
 
-	if (denominator < 0)
-		return (0);
-	t = -numerator / denominator;
-	*(double*)res = t;
-	if (t < 0)
-		return (0);
-	else
-		return (1);
+	if (b == 0)
+		return (res);
+    res.x = -a / b;
+    res.y = res.x;
+//printf(">>%10f\n", t);
+
+	return (res);
 }
 
 t_plane		*rt_new_plane(double x, double y, double z, t_vec n)
@@ -43,11 +44,10 @@ t_plane		*rt_new_plane(double x, double y, double z, t_vec n)
 
 	if (!(p = ft_memalloc(sizeof(t_plane))))
 		return (NULL);
-	p->c.x = x;
-	p->c.y = y;
-	p->c.z = z;
-	p->n = v_sub(n, p->c);
-	p->n = v_normalise(p->n);
+	p->o.x = x;
+	p->o.y = y;
+	p->o.z = z;
+	p->n = v_normalise(n);
 	return (p);
 }
 

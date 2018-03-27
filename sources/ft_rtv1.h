@@ -36,7 +36,7 @@ typedef struct 		s_sphere
 
 typedef struct 		s_plane
 {
-	t_vec	c;
+	t_vec	o;
 	t_vec	n;
 }					t_plane;
 
@@ -67,7 +67,7 @@ typedef struct 		s_light
 typedef struct		s_obj
 {
 	void	*objp;
-	int		(*intersect)(t_ray *r,  void *obj, void *res);
+    t_xy	(*intersect)(t_ray *r,  void *obj);
 	t_color	colr;
 
 }					t_obj;
@@ -82,7 +82,7 @@ typedef struct		s_objarr
 *** rt_sphere.c
 */
 
-int					rt_sphere_intersect(t_ray *r, void *obj, void *res);
+t_xy				rt_sphere_intersect(t_ray *r, void *obj);
 t_sphere			*rt_new_sphr(double x, double y, double z, double r);
 void 				rt_sphr_obj(t_obj *o, t_vec cntr, double r, uint32_t colr);
 
@@ -90,7 +90,7 @@ void 				rt_sphr_obj(t_obj *o, t_vec cntr, double r, uint32_t colr);
 *** rt_o_plane.c
 */
 
-int					rt_plane_intersect(t_ray *r, void *obj, void *res);
+t_xy				rt_plane_intersect(t_ray *r, void *obj);
 t_plane				*rt_new_plane(double x, double y, double z, t_vec n);
 //void 				rt_plane_obj(t_obj *o, t_vec c, t_vec n, uint32_t colr);
 

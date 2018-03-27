@@ -88,6 +88,9 @@ static int		ft_keycatch(int keycode, t_win *w)
 
 void			ft_keyhookloop(t_win *w, void *dat)
 {
+
+	dat = (void*)0;
+
 	mlx_hook(w->win, 2, 0, ft_keycatch, w);
 //	mlx_hook(w->win, 4, 5, ft_mouse_hook, dat);
 //	mlx_hook(w->win, 6, 1L << 6, ft_mouse_mov, dat);

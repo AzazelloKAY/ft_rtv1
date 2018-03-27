@@ -6,32 +6,29 @@
 /*   By: akokoshk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 21:19:30 by akokoshk          #+#    #+#             */
-/*   Updated: 2018/03/22 21:35:55 by akokoshk         ###   ########.fr       */
+/*   Updated: 2018/03/26 19:20:03 by akokoshk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_rtv1.h"
 
 
-int		rt_sphere_intersect(t_ray *r, void *obj, void *res)
+t_xy      rt_sphere_intersect(t_ray *r, void *obj)
 {
 	t_sphere	*s;
 	t_vec		qabc;
 	t_vec		len;
-	t_vec2		qres;
+	t_xy		qres;
 
 	s = (t_sphere*)obj;
-	qabc.x = v_mul_s(r->b, r->b);
+	qabc.x = v_dotprod(r->b, r->b);
 	len = v_sub(r->a, s->centr);
-	qabc.y = 2.0 * v_mul_s(r->b, len);
-	qabc.z = v_mul_s(len, len) - (s->radius * s->radius);
-	if (v_quad_equ(qabc.x, qabc.y, qabc.z, &qres))
-	{
-		*(t_vec2*)res = qres;
-		return (1);
-	}
-	else
-		return (0);
+	qabc.y = 2.0 * v_dotprod(r->b, len);
+	qabc.z = v_dotprod(len, len) - (s->radius * s->radius);
+    qres.x = -1;
+    qres.y = -1;
+	v_quad_equ(qabc.x, qabc.y, qabc.z, &qres);
+	return (qres);
 }
 
 t_sphere	*rt_new_sphr(double x, double y, double z, double r)

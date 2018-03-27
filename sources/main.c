@@ -6,7 +6,7 @@
 /*   By: akokoshk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 20:42:53 by akokoshk          #+#    #+#             */
-/*   Updated: 2018/03/23 21:47:08 by akokoshk         ###   ########.fr       */
+/*   Updated: 2018/03/26 19:45:48 by akokoshk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ int main()
 	w = ft_init_mlx("test rtv");
 	ft_init_img(w);
 	c = cam_new(0, 0, -1);
-	o = rt_new_obj_arr(3);
+	o = rt_new_obj_arr(4);
 
 
 	//rt_sphr_obj(o->obj[0], )
 	o->obj[0].colr.val = 0xFF00;
 	o->obj[0].intersect = rt_sphere_intersect;
-	o->obj[0].objp = rt_new_sphr(10, 0, 220, 40);
+	o->obj[0].objp = rt_new_sphr(10, 0, 149, 40);
 
 	o->obj[1].colr.val = 0xFF0000;
 	o->obj[1].intersect = rt_sphere_intersect;
@@ -49,12 +49,19 @@ int main()
 
 
 	t_vec n;
-	n.x = 0;
-	n.y = 1000;
+	n.x = 30;
+	n.y = 0;
 	n.z = 0;
 	o->obj[2].colr.val = 0xFFFF00;
 	o->obj[2].intersect = rt_plane_intersect;
-	o->obj[2].objp = rt_new_plane(0, 999, 0, n);
+	o->obj[2].objp = rt_new_plane(29, 0, 0, n);
+
+    n.x = -30;
+    n.y = 0;
+    n.z = 0;
+    o->obj[3].colr.val = 0xF0F0F0;
+    o->obj[3].intersect = rt_plane_intersect;
+    o->obj[3].objp = rt_new_plane(-60, 0, 0, n);
 
 
 

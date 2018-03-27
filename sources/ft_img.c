@@ -22,30 +22,30 @@ void			ft_pixtoimg_shift(t_img *i, t_point *p)
 	i->str[((i->w * (i->maxh - p->y)) + (p->x + i->maxw))] = p->colr.val;
 }
 
-static void		ft_writhelp(t_win *w)
-{
-	int start;
-	int i;
-
-	start = 1;
-	i = 18;
-	mlx_string_put(w->mlx, w->win, 5, start + (i * 0),
-		0xF0F090, "\"+/-\" - scaling");
-	mlx_string_put(w->mlx, w->win, 5, start + (i * 1),
-		0xF0F090, "\"Up, Down, Left, Right\" - moving");
-	mlx_string_put(w->mlx, w->win, 5, start + (i * 2),
-		0xF0F090, "\"NUM[82]\" - precision");
-	mlx_string_put(w->mlx, w->win, 5, start + (i * 3),
-		0xF0F090, "\"NUM[46]\" - color shifting");
-	mlx_string_put(w->mlx, w->win, 5, start + (i * 4),
-		0xF0F090, "\"NUM*\" - on/off colors");
-	mlx_string_put(w->mlx, w->win, 5, start + (i * 5),
-		0xF0F090, "\"NUM_enter\" - on/off julia mouse move");
-	mlx_string_put(w->mlx, w->win, 5, start + (i * 6),
-		0xF0F090, "\"NUM0\" - set to default");
-	mlx_string_put(w->mlx, w->win, 5, start + (i * 7),
-		0xF0F090, "\"Esc\" - exit");
-}
+//static void		ft_writhelp(t_win *w)
+//{
+//	int start;
+//	int i;
+//
+//	start = 1;
+//	i = 18;
+//	mlx_string_put(w->mlx, w->win, 5, start + (i * 0),
+//		0xF0F090, "\"+/-\" - scaling");
+//	mlx_string_put(w->mlx, w->win, 5, start + (i * 1),
+//		0xF0F090, "\"Up, Down, Left, Right\" - moving");
+//	mlx_string_put(w->mlx, w->win, 5, start + (i * 2),
+//		0xF0F090, "\"NUM[82]\" - precision");
+//	mlx_string_put(w->mlx, w->win, 5, start + (i * 3),
+//		0xF0F090, "\"NUM[46]\" - color shifting");
+//	mlx_string_put(w->mlx, w->win, 5, start + (i * 4),
+//		0xF0F090, "\"NUM*\" - on/off colors");
+//	mlx_string_put(w->mlx, w->win, 5, start + (i * 5),
+//		0xF0F090, "\"NUM_enter\" - on/off julia mouse move");
+//	mlx_string_put(w->mlx, w->win, 5, start + (i * 6),
+//		0xF0F090, "\"NUM0\" - set to default");
+//	mlx_string_put(w->mlx, w->win, 5, start + (i * 7),
+//		0xF0F090, "\"Esc\" - exit");
+//}
 
 void			ft_drawimg(t_win *w)
 {

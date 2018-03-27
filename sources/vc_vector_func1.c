@@ -6,7 +6,7 @@
 /*   By: akokoshk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/17 14:46:37 by akokoshk          #+#    #+#             */
-/*   Updated: 2018/03/22 21:26:08 by akokoshk         ###   ########.fr       */
+/*   Updated: 2018/03/26 19:46:46 by akokoshk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_vec		v_sub(t_vec a, t_vec b)
 	return (res);
 }
 
-double		v_mul_s(t_vec a, t_vec b)
+double		v_dotprod(t_vec a, t_vec b)
 {
 	return ((a.x * b.x) + (a.y * b.y) + (a.z * b.z));
 }
@@ -48,8 +48,8 @@ t_vec		v_mul_v(t_vec a, t_vec b)
 }
 
 /*
- * умножить вектор на -1 получишь разворот на 180
- */
+*** умножить вектор на -1 получишь разворот на 180
+*/
 
 t_vec		v_mul_scal(t_vec a, double b)
 {

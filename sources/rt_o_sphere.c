@@ -21,9 +21,9 @@ t_xy      rt_sphere_intersect(t_ray *r, void *obj)
 	t_xy		qres;
 
 	s = (t_sphere*)obj;
-	abc.x = v_dotprod(r->b, r->b);
-	len = v_sub(r->a, s->centr);
-	abc.y = 2.0 * v_dotprod(r->b, len);
+	abc.x = v_dotprod(r->dir, r->dir);
+	len = v_sub(r->or, s->centr);
+	abc.y = 2.0 * v_dotprod(r->dir, len);
 	abc.z = v_dotprod(len, len) - (s->radius * s->radius);
     qres.x = -1;
     qres.y = -1;
@@ -31,13 +31,13 @@ t_xy      rt_sphere_intersect(t_ray *r, void *obj)
 	return (qres);
 }
 
-t_sphere	*rt_new_sphr(double x, double y, double z, double r)
+t_sphere	*rt_new_sphr(double x, double y, double z, double rad)
 {
 	t_sphere *s;
 
 	if (!(s = ft_memalloc(sizeof(t_sphere))))
 		return (NULL);
-	s->radius = r;
+	s->radius = rad;
 	s->centr.x = x;
 	s->centr.y = y;
 	s->centr.z = z;

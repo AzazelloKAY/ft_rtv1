@@ -83,7 +83,7 @@ typedef struct		s_objarr
 */
 
 t_xy				rt_sphere_intersect(t_ray *r, void *obj);
-t_sphere			*rt_new_sphr(double x, double y, double z, double r);
+t_sphere			*rt_new_sphr(double x, double y, double z, double rad);
 void 				rt_sphr_obj(t_obj *o, t_sphere *s, uint32_t colr);
 
 /*

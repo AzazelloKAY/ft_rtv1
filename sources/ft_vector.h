@@ -31,8 +31,8 @@ typedef	struct		s_vec
 
 typedef struct		s_ray
 {
-	t_vec a;
-	t_vec b;
+	t_vec or;
+	t_vec dir;
 }					t_ray;
 
 typedef struct		s_cam

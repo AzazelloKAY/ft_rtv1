@@ -25,8 +25,8 @@ t_xy		rt_plane_intersect(t_ray *r, void *obj)
 //	a = v_dotprod(v_sub(p->o, r->a), p->n); //праволево
 //	b = v_dotprod(r->b, p->n);
 
-	ab.x = v_dotprod(p->n, v_sub(r->a, p->o));
-	ab.y = v_dotprod(p->n, r->b);
+	ab.x = v_dotprod(p->n, v_sub(r->or, p->o));
+	ab.y = v_dotprod(p->n, r->dir);
 
 	if (ab.y == 0)
 		return (res);

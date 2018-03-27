@@ -39,7 +39,6 @@ static t_color		ray_trace(t_ray *r, t_objarr *o)
         t = o->obj[i].intersect(r, o->obj[i].objp);
 		if (t.x < 0 && t.y < 0)
 			continue ;
-
 		if (t.x >= 0 && t.x < closest_t)
 		{
 			closest_t = t.x;
@@ -50,7 +49,6 @@ static t_color		ray_trace(t_ray *r, t_objarr *o)
             closest_t = t.y;
             closest_o = &o->obj[i];
         }
-
 	}
 	((closest_o != NULL) ? (c.val = closest_o->colr.val) : 0);
 	return (c);
@@ -61,7 +59,7 @@ void				rt_calc_scren(t_win	*w, t_cam *c, t_objarr *o)
 	t_point	p;
 	t_ray	ray;
 
-	ray.a = c->orig;
+	ray.or = c->orig;
 	p.y = w->img.maxh;
 	while (p.y > w->img.minh)
 	{
@@ -70,13 +68,13 @@ void				rt_calc_scren(t_win	*w, t_cam *c, t_objarr *o)
 		p.x = w->img.minw;
 		while (p.x < w->img.maxw)
 		{
-			ray.b.x = p.x;
-			ray.b.y = p.y;
-			ray.b.z = c->orig.z + 1;		//distance to camera // calculate it
-			ray.b = canv_to_vp(ray.b, &w->img, c);
+			ray.dir.x = p.x;
+			ray.dir.y = p.y;
+			ray.dir.z = c->orig.z + 1;		//distance to camera // calculate it
+			ray.dir = canv_to_vp(ray.dir, &w->img, c);
 
-			ray.b = v_sub(ray.b, c->orig);	//?
-			ray.b = v_normalise(ray.b);		//?
+			ray.dir = v_sub(ray.dir, c->orig);	//?
+			ray.dir = v_normalise(ray.dir);		//?
 
 			p.colr = ray_trace(&ray, o);
 

@@ -35,8 +35,8 @@ int main()
 	w = ft_init_mlx("test rtv");
 	ft_init_img(w);
 	c = cam_new(0, 0, -1);
-	o = rt_new_obj_arr(4);
 
+	o = rt_new_obj_arr(4);
 
     rt_sphr_obj(&o->obj[0], rt_new_sphr(10, 0, 536, 70), 0xFF00);
 	rt_sphr_obj(&o->obj[1], rt_new_sphr(-50, 0, 550, 80), 0xFF0000);

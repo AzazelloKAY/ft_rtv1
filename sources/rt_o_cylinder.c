@@ -12,19 +12,28 @@
 
 #include "ft_rtv1.h"
 
-//t_xy      rt_cylinder_intersect(t_ray *r, void *obj)
-//{
-//	t_cylinder	*cy;
-//	t_xy		res;
-//	t_vec		abc;
-//
-//	cy = (t_cylinder*)obj;
-//	abc.x =
-//
-//	return (res);
-//}
+t_xy		rt_cylindr_intersect(t_ray *r, void *obj)
+{
+	t_cylinder	*cy;
+	t_xy		res;
+	t_vec		abc;
+	double		tprod;
+	t_vec		len;
 
-t_cylinder  *rt_new_cylinder(double xyz[3], double radius, t_vec v, double maxm)
+	cy = (t_cylinder*)obj;
+	tprod = v_dotprod(r->dir, cy->v);
+	abc.x = v_dotprod(r->dir, r->dir) - (tprod * tprod);
+	len = v_sub(r->or, cy->c);
+	abc.y = 2 * (v_dotprod(r->dir, len) - (tprod * v_dotprod(len, cy->v)));
+	tprod = v_dotprod(len, cy->v);
+	abc.z = v_dotprod(len, len) - (tprod * tprod) - (cy->rad * cy->rad);
+	res.x = -1;
+	res.y = -1;
+	v_quad_equ(abc.x, abc.y, abc.z, &res);
+	return (res);
+}
+
+t_cylinder  *rt_new_cylindr(double xyz[3], double rad, t_vec v, double mxm)
 {
     t_cylinder *cy;
 
@@ -33,15 +42,15 @@ t_cylinder  *rt_new_cylinder(double xyz[3], double radius, t_vec v, double maxm)
     cy->c.x = xyz[0];
     cy->c.y = xyz[1];
     cy->c.z = xyz[2];
-    cy->rad = radius;
-    cy->v = v;
-	cy->maxm = maxm;
+    cy->rad = rad;
+    cy->v = v_normalise(v);
+	cy->maxm = mxm;
     return (cy);
 }
 
-void 		rt_cylinder_obj(t_obj *o, t_cylinder *cy, uint32_t colr)
+void 		rt_cylindr_obj(t_obj *o, t_cylinder *cy, uint32_t colr)
 {
 	o->colr.val = colr;
-	//o->intersect = rt_cylinder_intersect;
+	o->intersect = rt_cylindr_intersect;
 	o->objp = cy;
 }

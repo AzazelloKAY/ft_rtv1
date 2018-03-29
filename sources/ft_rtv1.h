@@ -32,13 +32,13 @@ typedef struct 	s_sphere
 {
 	t_vec	centr;
 	double	radius;
-}					t_sphere;
+}				t_sphere;
 
 typedef struct 	s_plane
 {
 	t_vec	o;
 	t_vec	n;
-}					t_plane;
+}				t_plane;
 
 typedef struct 	s_cylinder
 {
@@ -46,7 +46,7 @@ typedef struct 	s_cylinder
 	t_vec	v;
 	double	rad;
 	double	maxm;
-}					t_cylinder;
+}				t_cylinder;
 
 typedef struct 	s_cone
 {
@@ -56,13 +56,13 @@ typedef struct 	s_cone
 	double	minm;
 	double	maxm;
 
-}					t_cone;
+}				t_cone;
 
 typedef struct 	s_light
 {
 	t_vec	centr;
 	t_color	colr;
-}					t_light;
+}				t_light;
 
 typedef struct	s_obj
 {
@@ -70,13 +70,15 @@ typedef struct	s_obj
     t_xy	(*intersect)(t_ray *r,  void *obj);
 	t_color	colr;
 
-}					t_obj;
+}				t_obj;
 
-typedef struct	s_objarr
+typedef struct	s_scene
 {
 	int		objnum;
 	t_obj	*obj;
-}				t_objarr;
+	int		lnum;
+	t_light	*light;
+}				t_scene;
 
 /*
 *** rt_sphere.c
@@ -95,7 +97,7 @@ t_plane			*rt_new_plane(double x, double y, double z, t_vec n);
 void			rt_plane_obj(t_obj *o, t_plane *p, uint32_t colr);
 
 /*
-*** vrt_o_cylinder.c
+*** rt_o_cylinder.c
 */
 
 t_xy			rt_cylindr_intersect(t_ray *r, void *obj);
@@ -103,14 +105,22 @@ t_cylinder  	*rt_new_cylindr(double xyz[3], double rad, t_vec v, double mxm);
 void 			rt_cylindr_obj(t_obj *o, t_cylinder *cy, uint32_t colr);
 
 /*
-** rt_screen_trace.c
+*** rt_o_cone.c
 */
 
-void			rt_calc_scren(t_win	*w, t_cam *c, t_objarr *o);
+t_xy			rt_cone_intersect(t_ray *r, void *obj);
+t_cone			*rt_new_cone(double xyz[3], t_vec v, double k_minm_maxm[3]);
+void			rt_cone_obj(t_obj *o, t_cone *co, uint32_t colr);
+
+/*
+*** rt_screen_trace.c
+*/
+
+void			rt_calc_scren(t_win	*w, t_cam *c, t_scene *o);
 
 /*
 *** rt_obj.c
 */
-t_objarr		*rt_new_obj_arr(int num);
+t_scene		*rt_new_obj_arr(int onum, int lnum);
 
 #endif

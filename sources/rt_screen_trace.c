@@ -22,7 +22,7 @@ static t_vec		canv_to_vp(t_vec point, t_img *i, t_cam *c)
 	return (v);
 }
 
-static t_color		ray_trace(t_ray *r, t_objarr *o)
+static t_color		ray_trace(t_ray *r, t_scene *o)
 {
 	t_color	c;
 	int 	i;
@@ -54,7 +54,7 @@ static t_color		ray_trace(t_ray *r, t_objarr *o)
 	return (c);
 }
 
-void				rt_calc_scren(t_win	*w, t_cam *c, t_objarr *o)
+void				rt_calc_scren(t_win	*w, t_cam *c, t_scene *o)
 {
 	t_point	p;
 	t_ray	ray;

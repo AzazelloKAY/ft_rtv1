@@ -10,4 +10,6 @@ add_executable(ft_rtv1 sources/main.c sources/ft_rtv1.h sources/rt_o_sphere.c so
 
 link_directories(libft sources)
 
+#link_libraries(/usr/local/include/mlx.h)
+
 target_link_libraries(ft_rtv1 ${CMAKE_SOURCE_DIR}/libft/libft.a)

@@ -12,27 +12,43 @@
 
 #include "ft_rtv1.h"
 
-static t_obj		*rt_new_obj(int num)
+static t_obj		*rt_new_obj(int onum)
 {
 	t_obj	*o;
 
-	if (num < 1)
+	if (onum < 1)
 		return (NULL);
-	if (!(o = ft_memalloc(sizeof(t_obj) * num)))
+	if (!(o = ft_memalloc(sizeof(t_obj) * onum)))
 		return (NULL);
 	return (o);
 }
 
-t_objarr			*rt_new_obj_arr(int num)
+static t_light		*rt_new_light(int lnum)
 {
-	t_objarr	*objarr;
+	t_light	*l;
 
-	if (num < 1)
+	if (lnum < 1)
 		return (NULL);
-	if (!(objarr = ft_memalloc(sizeof(t_objarr))))
+	if (!(l = ft_memalloc(sizeof(t_light) * lnum)))
 		return (NULL);
-	objarr->objnum = num;
-	objarr->obj = rt_new_obj(num);
-	return (objarr);
+	return (l);
+}
+
+t_scene				*rt_new_obj_arr(int onum, int lnum)
+{
+	t_scene	*scene;
+
+	if (onum < 1)
+		return (NULL);
+	if (!(scene = ft_memalloc(sizeof(t_scene))))
+		return (NULL);
+	scene->objnum = onum;
+	scene->obj = rt_new_obj(onum);
+	if (lnum > 0)
+	{
+		scene->lnum = lnum;
+		scene->light = rt_new_light(lnum);
+	}
+	return (scene);
 }
 

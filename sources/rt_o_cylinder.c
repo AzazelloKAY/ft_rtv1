@@ -33,7 +33,7 @@ t_xy		rt_cylindr_intersect(t_ray *r, void *obj)
 	return (res);
 }
 
-t_cylinder  *rt_new_cylindr(double xyz[3], double rad, t_vec v, double mxm)
+t_cylinder	*rt_new_cylindr(double xyz[3], double rad, t_vec v, double mxm)
 {
     t_cylinder *cy;
 

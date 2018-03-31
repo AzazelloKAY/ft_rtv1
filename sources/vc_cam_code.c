@@ -29,7 +29,3 @@ t_cam	*cam_new(double x, double y, double z, double fov)
 
 	return (c);
 }
-
-
-
-

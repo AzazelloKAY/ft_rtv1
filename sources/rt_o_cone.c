@@ -26,7 +26,8 @@ t_xy		rt_cone_intersect(t_ray *r, void *obj)
 
 
 	co = (t_cone*)obj;
-
+	res.x = -1;
+	res.y = -1;
 	kk1 = 1 + (co->k * co->k);
 	tt = v_dotprod(r->dir, co->v);
 	abc.x = v_dotprod(r->dir, r->dir) - kk1 * (tt * tt);
@@ -34,8 +35,6 @@ t_xy		rt_cone_intersect(t_ray *r, void *obj)
 	abc.y = 2 * (v_dotprod(r->dir, len) - kk1 * (tt * v_dotprod(len, co->v)));
 	tt = v_dotprod(len, co->v);
 	abc.z = v_dotprod(len, len) - kk1 * (tt * tt);
-	res.x = -1;
-	res.y = -1;
 	v_quad_equ(abc.x, abc.y, abc.z, &res);
 	return (res);
 }

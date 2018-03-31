@@ -62,7 +62,7 @@ typedef struct 	s_light
 {
 	t_vec	cntr;
 	t_color	colr;
-	double	fading;
+	t_color	fading;
 }				t_light;
 
 typedef struct	s_obj
@@ -81,12 +81,17 @@ typedef struct	s_scene
 	t_light	*light;
 }				t_scene;
 
+typedef struct	s_rtres
+{
+	t_xy	t;
+	t_color	colr;
+}				t_rtres;
 /*
 *** rt_sphere.c
 */
 
 t_xy			rt_sphere_intersect(t_ray *r, void *obj);
-t_sphere		*rt_new_sphr(double x, double y, double z, double rad);
+t_sphere		*rt_new_sphr(double xyz[3], double rad);
 void 			rt_sphr_obj(t_obj *o, t_sphere *s, uint32_t colr);
 
 /*
@@ -94,7 +99,7 @@ void 			rt_sphr_obj(t_obj *o, t_sphere *s, uint32_t colr);
 */
 
 t_xy			rt_plane_intersect(t_ray *r, void *obj);
-t_plane			*rt_new_plane(double x, double y, double z, t_vec n);
+t_plane			*rt_new_plane(double xyz[3], t_vec n);
 void			rt_plane_obj(t_obj *o, t_plane *p, uint32_t colr);
 
 /*

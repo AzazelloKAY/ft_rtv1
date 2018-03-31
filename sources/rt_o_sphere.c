@@ -20,27 +20,27 @@ t_xy      rt_sphere_intersect(t_ray *r, void *obj)
 	t_vec		len;
 	t_xy		qres;
 
+    qres.x = -1;
+    qres.y = -1;
 	s = (t_sphere*)obj;
 	abc.x = v_dotprod(r->dir, r->dir);
 	len = v_sub(r->or, s->centr);
 	abc.y = 2.0 * v_dotprod(r->dir, len);
 	abc.z = v_dotprod(len, len) - (s->radius * s->radius);
-    qres.x = -1;
-    qres.y = -1;
 	v_quad_equ(abc.x, abc.y, abc.z, &qres);
 	return (qres);
 }
 
-t_sphere	*rt_new_sphr(double x, double y, double z, double rad)
+t_sphere	*rt_new_sphr(double xyz[3], double rad)
 {
 	t_sphere *s;
 
 	if (!(s = ft_memalloc(sizeof(t_sphere))))
 		return (NULL);
 	s->radius = rad;
-	s->centr.x = x;
-	s->centr.y = y;
-	s->centr.z = z;
+	s->centr.x = xyz[0];
+	s->centr.y = xyz[1];
+	s->centr.z = xyz[2];
 	return (s);
 }
 

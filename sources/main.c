@@ -36,33 +36,36 @@ int main()
 	ft_init_img(w);
 	c = cam_new(0, 0, -1, 95);
 
-	o = rt_new_obj_arr(5, 0);
+	o = rt_new_obj_arr(5, 2);
 
 	t_vec v;
 	v.x = 0;
 	v.y = 100;
 	v.z = 0;
 
-	double con_vertx[3] = {20.0, -100.0, 540.0};
+	double coxyz[3] = {20.0, -100.0, 540.0};
 	double k_minm_maxm[3] = {10, 4.0, 200.0};
 
-	rt_cone_obj(&o->obj[0], rt_new_cone(con_vertx, v, k_minm_maxm), 0x254F21);
+	rt_cone_obj(&o->obj[0], rt_new_cone(coxyz, v, k_minm_maxm), 0x254F21);
 
 	t_vec n;
 	n.x = 2;
 	n.y = 1;
 	n.z = 20;
-	double cyl_cen[3] = {1.0, 2.0, 200.0};
-	rt_cylindr_obj(&o->obj[1], rt_new_cylindr(cyl_cen, 2, n, 1), 0x123456);
+	double cyxyz[3] = {1.0, 2.0, 200.0};
+	rt_cylindr_obj(&o->obj[1], rt_new_cylindr(cyxyz, 2, n, 1), 0x123456);
 
-	rt_sphr_obj(&o->obj[2], rt_new_sphr(10, 0, 536, 70), 0xFF00);
-	rt_sphr_obj(&o->obj[3], rt_new_sphr(-50, 0, 550, 80), 0xFF0000);
+	double s1xyz[3] = {10, 0, 536};
+	double s2xyz[3] = {-50, 0, 550};
+	rt_sphr_obj(&o->obj[2], rt_new_sphr(s1xyz, 70), 0xFF00);
+	rt_sphr_obj(&o->obj[3], rt_new_sphr(s2xyz, 80), 0xFF0000);
 //
 	//t_vec n;
 	n.x = 301;
 	n.y = 0;
 	n.z = 0;
-	rt_plane_obj(&o->obj[4], rt_new_plane(50, 0, 0, n), 0xFFFF00);
+	double pxyz[3] = {50.0, 0.0, 0.0};
+	rt_plane_obj(&o->obj[4], rt_new_plane(pxyz, n), 0xFFFF00);
 //
 //    n.x = -301;
 //    n.y = 0;

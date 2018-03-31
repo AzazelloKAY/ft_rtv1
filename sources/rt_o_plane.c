@@ -19,9 +19,9 @@ t_xy		rt_plane_intersect(t_ray *r, void *obj)
     t_xy		ab;
     t_xy		res;
 
-	p = (t_plane*)obj;
     res.x = -1;
     res.y = -1;
+	p = (t_plane*)obj;
 //	a = v_dotprod(v_sub(p->o, r->a), p->n); //праволево
 //	b = v_dotprod(r->b, p->n);
 
@@ -36,15 +36,15 @@ t_xy		rt_plane_intersect(t_ray *r, void *obj)
 	return (res);
 }
 
-t_plane		*rt_new_plane(double x, double y, double z, t_vec n)
+t_plane		*rt_new_plane(double xyz[3], t_vec n)
 {
 	t_plane *p;
 
 	if (!(p = ft_memalloc(sizeof(t_plane))))
 		return (NULL);
-	p->o.x = x;
-	p->o.y = y;
-	p->o.z = z;
+	p->o.x = xyz[0];
+	p->o.y = xyz[1];
+	p->o.z = xyz[2];
 	p->n = v_normalise(n);
 	return (p);
 }

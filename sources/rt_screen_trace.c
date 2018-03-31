@@ -14,11 +14,25 @@
 
 static t_vec		canv_to_vp(t_vec point, t_img *i, t_cam *c)
 {
-	t_vec v;
+	t_vec	v;
+	double	screnratio;
 
-	v.x = point.x * (c->vw / i->w);
-	v.y = point.y * (c->vh / i->h);
+	screnratio = ((double)i->w / (double)i->h);
+	v.x = point.x * (c->vpw / i->w) * screnratio * c->fov;
+	v.y = point.y * (c->vph / i->h) * c->fov;
 	v.z = point.z;
+
+
+//	Matrix44f cameraToWorld;
+//	cameraToWorld.set(...); // set matrix
+//	Vec3f rayOriginWorld, rayPWorld;
+//	cameraToWorld.multVectMatrix(rayOrigin, rayOriginWorld);
+//	cameraToWorld.multVectMatrix(Vec3f(Px, Py, -1), rayPWorld);
+//	Vec3f rayDirection = rayPWorld - rayOriginWorld;
+
+	v = v_sub(v, c->orig);
+	v = v_normalise(v);
+
 	return (v);
 }
 
@@ -39,12 +53,12 @@ static t_color		ray_trace(t_ray *r, t_scene *o)
         t = o->obj[i].intersect(r, o->obj[i].objp);
 		if (t.x < 0 && t.y < 0)
 			continue ;
-		if (t.x >= 0 && t.x < closest_t)
+		if (t.x >= 0 && t.x <= closest_t)
 		{
 			closest_t = t.x;
 			closest_o = &o->obj[i];
 		}
-        if (t.y >= 0 && t.y < closest_t)
+        if (t.y >= 0 && t.y <= closest_t)
         {
             closest_t = t.y;
             closest_o = &o->obj[i];
@@ -63,8 +77,6 @@ void				rt_calc_scren(t_win	*w, t_cam *c, t_scene *o)
 	p.y = w->img.maxh;
 	while (p.y > w->img.minh)
 	{
-
-
 		p.x = w->img.minw;
 		while (p.x < w->img.maxw)
 		{
@@ -72,9 +84,6 @@ void				rt_calc_scren(t_win	*w, t_cam *c, t_scene *o)
 			ray.dir.y = p.y;
 			ray.dir.z = c->orig.z + 1;		//distance to camera // calculate it
 			ray.dir = canv_to_vp(ray.dir, &w->img, c);
-
-			ray.dir = v_sub(ray.dir, c->orig);	//?
-			ray.dir = v_normalise(ray.dir);		//?
 
 			p.colr = ray_trace(&ray, o);
 

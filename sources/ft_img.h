@@ -16,6 +16,7 @@
 # include <math.h>
 # include "../libft/libft.h"
 //# include <mlx.h>
+//# include </usr/local/include/mlx.h>
 # include </usr/local/include/mlx.h>
 # define WINHEIGHT 600
 # define WINWIDTH 900

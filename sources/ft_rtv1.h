@@ -60,8 +60,9 @@ typedef struct 	s_cone
 
 typedef struct 	s_light
 {
-	t_vec	centr;
+	t_vec	cntr;
 	t_color	colr;
+	double	fading;
 }				t_light;
 
 typedef struct	s_obj

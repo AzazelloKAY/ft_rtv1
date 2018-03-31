@@ -40,8 +40,8 @@ typedef struct		s_cam
 	t_vec	orig;
 	t_vec	angle;
 	double	fov;
-	double	vh;
-	double	vw;
+	double	vph;
+	double	vpw;
 	double	tmin;
 	double	tmax;
 
@@ -71,6 +71,6 @@ int			v_quad_equ(double a, double b, double c, t_xy *res);
 *** vc_cam_code.c
 */
 
-t_cam		*cam_new(double x, double y, double z);
+t_cam		*cam_new(double x, double y, double z, double fov);
 
 #endif

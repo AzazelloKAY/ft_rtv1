@@ -28,6 +28,14 @@
 ** FT_RTv1 sources
 */
 
+typedef enum	e_lighttype
+{
+	e_ambient = 0,
+	e_point = 1,
+	e_directional = 2,
+
+}				t_lighttype;
+
 typedef struct 	s_sphere
 {
 	t_vec	centr;
@@ -60,9 +68,12 @@ typedef struct 	s_cone
 
 typedef struct 	s_light
 {
-	t_vec	cntr;
-	t_color	colr;
-	t_color	fading;
+	t_lighttype	type;
+	t_vec		cntr;
+	t_color		colr;
+	double		intens;
+	double		fading;
+	t_vec		dir;
 }				t_light;
 
 typedef struct	s_obj
@@ -86,6 +97,7 @@ typedef struct	s_rtres
 	t_xy	t;
 	t_color	colr;
 }				t_rtres;
+
 /*
 *** rt_sphere.c
 */
@@ -122,11 +134,28 @@ void			rt_cone_obj(t_obj *o, t_cone *co, uint32_t colr);
 *** rt_screen_trace.c
 */
 
+t_rtres			ray_trace(t_ray *r, t_scene *s);
 void			rt_calc_scren(t_win	*w, t_cam *c, t_scene *o);
 
 /*
 *** rt_obj.c
 */
+
 t_scene		*rt_new_obj_arr(int onum, int lnum);
+
+/*
+*** rt_light.c
+*/
+
+void		rt_set_ambi_light(t_light *l, double i);
+void		rt_set_point_light(t_light *l, double xyz[3], double i, double f);
+double		rt_get_light_intensity(t_ray r, t_scene *s, t_xy t);
+
+
+/*
+***
+*/
+
+double		f_get_smalest(t_xy *t);
 
 #endif

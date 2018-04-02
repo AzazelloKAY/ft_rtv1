@@ -38,14 +38,16 @@ int main()
 
 	o = rt_new_obj_arr(5, 2);
 
+	rt_set_ambi_light(&o->light[0], 0.4);
+	double		lxyz[3] = {-150.0, 150, 150};
+	rt_set_point_light(&o->light[0], lxyz, 0.6, 0);
+
 	t_vec v;
 	v.x = 0;
 	v.y = 100;
 	v.z = 0;
-
 	double coxyz[3] = {20.0, -100.0, 540.0};
 	double k_minm_maxm[3] = {10, 4.0, 200.0};
-
 	rt_cone_obj(&o->obj[0], rt_new_cone(coxyz, v, k_minm_maxm), 0x254F21);
 
 	t_vec n;

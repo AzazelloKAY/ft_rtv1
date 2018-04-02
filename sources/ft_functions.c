@@ -12,5 +12,24 @@
 
 #include "ft_rtv1.h"
 
+double	f_get_smalest(t_xy *t)
+{
+	double res;
+	double tt;
 
+	res = -1;
+	if (t->y < t->x)
+	{
+		tt = t->y;
+		t->y = t->x;
+		t->x = tt;
+	}
+	if (t->x < 0 && t->y < 0)
+		return (res);
+	if ((res = t->x) < 0)
+		res = t->y;
+	else if (t->y >= 0 && t->y < res)
+		res = t->y;
+	return (res);
+}
 

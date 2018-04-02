@@ -36,7 +36,11 @@ static t_vec		canv_to_vp(t_vec point, t_img *i, t_cam *c)
 	return (v);
 }
 
-static t_rtres		ray_trace(t_ray *r, t_scene *o)
+/*
+*** TODO remove double calculation of color for shadows RT
+*/
+
+t_rtres				ray_trace(t_ray *r, t_scene *s)
 {
 	int 	i;
 	double	closest_t;
@@ -46,28 +50,33 @@ static t_rtres		ray_trace(t_ray *r, t_scene *o)
 	rt.colr.val = 0;
 	closest_t = INFINITY;
 	closest_o = NULL;
-	i = o->objnum;
+	i = s->objnum;
 	while (i--)
 	{
-        rt.t = o->obj[i].intersect(r, o->obj[i].objp);
-		if (rt.t.x < 0 && rt.t.y < 0)
+        rt.t = s->obj[i].intersect(r, s->obj[i].objp);
+		if (f_get_smalest(&rt.t) < 0)//rt.t.x < 0 && rt.t.y < 0)
 			continue ;
-		if (rt.t.x >= 0 && rt.t.x <= closest_t)
+		if (rt.t.x <= closest_t)
 		{
 			closest_t = rt.t.x;
-			closest_o = &o->obj[i];
+			closest_o = &s->obj[i];
 		}
-        if (rt.t.y >= 0 && rt.t.y <= closest_t)
-        {
-            closest_t = rt.t.y;
-            closest_o = &o->obj[i];
-        }
+//		if (rt.t.x >= 0 && rt.t.x <= closest_t)
+//		{
+//			closest_t = rt.t.x;
+//			closest_o = &s->obj[i];
+//		}
+//        if (rt.t.y >= 0 && rt.t.y <= closest_t)
+//        {
+//            closest_t = rt.t.y;
+//            closest_o = &s->obj[i];
+//        }
 	}
 	((closest_o != NULL) ? (rt.colr.val = closest_o->colr.val) : 0);
 	return (rt);
 }
 
-void				rt_calc_scren(t_win	*w, t_cam *c, t_scene *o)
+void				rt_calc_scren(t_win	*w, t_cam *c, t_scene *s)
 {
 	t_point	p;
 	t_rtres	rtres;
@@ -85,8 +94,8 @@ void				rt_calc_scren(t_win	*w, t_cam *c, t_scene *o)
 			ray.dir.z = c->orig.z + 1;		//distance to camera // calculate it
 			ray.dir = canv_to_vp(ray.dir, &w->img, c);
 
-			rtres = ray_trace(&ray, o);
-			p.colr = rtres.colr;
+			rtres = ray_trace(&ray, s);
+			p.colr.val = rtres.colr.val * rt_get_light_intensity(ray, s, rtres.t);
 			//calculate light intensity thru every object on scene to every light source
 			//ray.or = c->orig + t * ray.dir;
 			//ray.dir = every light sourse point

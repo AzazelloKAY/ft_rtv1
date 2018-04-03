@@ -40,40 +40,32 @@ static t_vec		canv_to_vp(t_vec point, t_img *i, t_cam *c)
 *** TODO remove double calculation of color for shadows RT
 */
 
-t_rtres				ray_trace(t_ray *r, t_scene *s)
+int				ray_trace(t_ray *r, t_scene *s, t_rtres *rt)
 {
 	int 	i;
 	double	closest_t;
-	t_rtres	rt;
+	t_xy	t;
 	t_obj	*closest_o;
 
-	rt.colr.val = 0;
 	closest_t = INFINITY;
 	closest_o = NULL;
 	i = s->objnum;
 	while (i--)
 	{
-        rt.t = s->obj[i].intersect(r, s->obj[i].objp);
-		if (f_get_smalest(&rt.t) < 0)//rt.t.x < 0 && rt.t.y < 0)
-			continue ;
-		if (rt.t.x <= closest_t)
+		t = s->obj[i].intersect(r, s->obj[i].objp);
+		if (f_get_smalest(&t) < 0)//rt.t.x < 0 && rt.t.y < 0)
+			continue;
+		if (t.x <= closest_t)
 		{
-			closest_t = rt.t.x;
+			rt->t = t;
+			closest_t = t.x;
 			closest_o = &s->obj[i];
 		}
-//		if (rt.t.x >= 0 && rt.t.x <= closest_t)
-//		{
-//			closest_t = rt.t.x;
-//			closest_o = &s->obj[i];
-//		}
-//        if (rt.t.y >= 0 && rt.t.y <= closest_t)
-//        {
-//            closest_t = rt.t.y;
-//            closest_o = &s->obj[i];
-//        }
 	}
-	((closest_o != NULL) ? (rt.colr.val = closest_o->colr.val) : 0);
-	return (rt);
+	rt->colr.val = (closest_o != NULL) ? closest_o->colr.val : 0;
+	if (closest_o != NULL)
+		return (1);
+	return (0);
 }
 
 void				rt_calc_scren(t_win	*w, t_cam *c, t_scene *s)
@@ -81,9 +73,11 @@ void				rt_calc_scren(t_win	*w, t_cam *c, t_scene *s)
 	t_point	p;
 	t_rtres	rtres;
 	t_ray	ray;
+	double	intens;
 
 	ray.or = c->orig;
 	p.y = w->img.maxh;
+	ray.dir.z = c->orig.z + 1;		//distance to camera // calculate it
 	while (p.y > w->img.minh)
 	{
 		p.x = w->img.minw;
@@ -91,11 +85,20 @@ void				rt_calc_scren(t_win	*w, t_cam *c, t_scene *s)
 		{
 			ray.dir.x = p.x;
 			ray.dir.y = p.y;
-			ray.dir.z = c->orig.z + 1;		//distance to camera // calculate it
 			ray.dir = canv_to_vp(ray.dir, &w->img, c);
 
-			rtres = ray_trace(&ray, s);
-			p.colr.val = rtres.colr.val * rt_get_light_intensity(ray, s, rtres.t);
+			if (ray_trace(&ray, s, &rtres))
+			{
+				intens = rt_get_light_intensity(ray, s, rtres.t.x);
+
+				//printf(">%6f\n", intens);
+
+				rtres.colr = ft_colr_mul_scal(rtres.colr, intens);
+				if (rtres.colr.val == 0)
+					printf("zero\n");
+			}
+			p.colr.val = rtres.colr.val;
+
 			//calculate light intensity thru every object on scene to every light source
 			//ray.or = c->orig + t * ray.dir;
 			//ray.dir = every light sourse point

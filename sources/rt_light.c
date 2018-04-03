@@ -34,24 +34,24 @@ void	rt_set_point_light(t_light *l, double xyz[3], double i, double f)
 	l->fading = f;
 }
 
-double	rt_get_light_intensity(t_ray r, t_scene *s, t_xy t)
+double	rt_get_light_intensity(t_ray ray, t_scene *s, double t)
 {
 	t_rtres	tt;
 	double	res;
 	int		i;
 
-	res = 0;
-	if ((tt.t.x = f_get_smalest(&t)) < 0)
+	res = (s->lnum > 0) ? 0 : 1;
+	if (t < 0)
 		return (res);
-	r.or = v_add(r.or, v_mul_scal(r.dir, tt.t.x));
+	ray.or = v_add(ray.or, v_mul_scal(ray.dir, t-0.0001));
 	i = 0;
 	while (i < s->lnum)
 	{
 		if (s->light[i].type == e_point)
 		{
-			r.dir = v_normalise(s->light[i].cntr);
-			tt = ray_trace(&r, s);
-			if (tt.t.x >= 0 || tt.t.y >= 0)
+			//ПРОВЕРЯТЬ ЧТО ТЕКУЩИЙ ОБЪЕКТ ЭТО САМ ОБЪЕКТ ДЛЯ КОТОРОГО СЧИТАЮ СВЕТ!!
+			ray.dir = v_normalise(s->light[i].cntr);
+			if (!ray_trace(&ray, s, &tt))
 				res += s->light[i].intens;
 
 		}
@@ -59,7 +59,5 @@ double	rt_get_light_intensity(t_ray r, t_scene *s, t_xy t)
 			res += s->light[i].intens;
 		i++;
 	}
-	((res > 1) ? res = 1 : 0);
-	((res < 0) ? res = 0 : 0);
 	return (res);
 }

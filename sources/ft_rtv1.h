@@ -134,7 +134,7 @@ void			rt_cone_obj(t_obj *o, t_cone *co, uint32_t colr);
 *** rt_screen_trace.c
 */
 
-t_rtres			ray_trace(t_ray *r, t_scene *s);
+int				ray_trace(t_ray *r, t_scene *s, t_rtres *rt);
 void			rt_calc_scren(t_win	*w, t_cam *c, t_scene *o);
 
 /*
@@ -149,7 +149,7 @@ t_scene		*rt_new_obj_arr(int onum, int lnum);
 
 void		rt_set_ambi_light(t_light *l, double i);
 void		rt_set_point_light(t_light *l, double xyz[3], double i, double f);
-double		rt_get_light_intensity(t_ray r, t_scene *s, t_xy t);
+double		rt_get_light_intensity(t_ray r, t_scene *s, double t);
 
 
 /*

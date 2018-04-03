@@ -54,17 +54,27 @@ void			ft_drawimg(t_win *w)
 	//ft_writhelp(w);
 }
 
-unsigned int 	ft_colrlim(double c)
+t_color 		ft_colr_add(t_color c1, t_color c2)
 {
 	unsigned int t;
 
-	if (c < 1 || c == NAN)
-		return (0);
-	if (c == INFINITY)
-		return (255);
-	t = (unsigned int)c;
-	return (t % 255);
+	c1.chnl.a = ((t = c1.chnl.a + c2.chnl.a) <= 0xFF) ? t : 0xFF;
+	c1.chnl.r = ((t = c1.chnl.r + c2.chnl.r) <= 0xFF) ? t : 0xFF;
+	c1.chnl.g = ((t = c1.chnl.g + c2.chnl.g) <= 0xFF) ? t : 0xFF;
+	c1.chnl.b = ((t = c1.chnl.b + c2.chnl.b) <= 0xFF) ? t : 0xFF;
+	return (c1);
 }
 
+t_color			ft_colr_mul_scal(t_color c, double n)
+{
+	double t;
 
+	if (n > 0xFF)
+		c.val = 0xFFFFFF;
+	c.chnl.a = ((t = c.chnl.a * n) <= 0xFF) ? (unsigned int)t : 0xFF;
+	c.chnl.r = ((t = c.chnl.r * n) <= 0xFF) ? (unsigned int)t : 0xFF;
+	c.chnl.g = ((t = c.chnl.g * n) <= 0xFF) ? (unsigned int)t : 0xFF;
+	c.chnl.b = ((t = c.chnl.b * n) <= 0xFF) ? (unsigned int)t : 0xFF;
+	return (c);
 
+}

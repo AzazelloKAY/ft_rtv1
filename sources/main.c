@@ -36,13 +36,16 @@ int main()
 	ft_init_img(w);
 	c = cam_new(0, 0, -1, 95);
 
-	o = rt_new_obj_arr(4, 2);
+	o = rt_new_obj_arr(6, 3);
 
 	//AMBI LIGHT
-	rt_set_ambi_light(&o->light[0], 0.6);
+	rt_set_ambi_light(&o->light[0], 0.2);
 	//POINT LIGHT
-	double		lxyz[3] = {200, 100, 10};//{-150.0, 150, 150};
+	double		lxyz[3] = {150, 10, 400};//{-150.0, 150, 150};
 	rt_set_point_light(&o->light[1], lxyz, 0.4, 0);
+
+	double		l2xyz[3] = {-20, -50, -10};//{-150.0, 150, 150};
+	rt_set_point_light(&o->light[2], l2xyz, 0.3, 0);
 
 	//1
 	double s1xyz[3] = {20, 0, 490};
@@ -60,6 +63,7 @@ int main()
 	double k_minm_maxm[3] = {10, 4.0, 200.0};
 	rt_cone_obj(&o->obj[2], rt_new_cone(coxyz, v, k_minm_maxm), 0x254F21);
 
+
 	//4
 	t_vec n;
 	n.x = 180;
@@ -68,20 +72,21 @@ int main()
 	double cyxyz[3] = {10.0, 2.0, 200.0};
 	rt_cylindr_obj(&o->obj[3], rt_new_cylindr(cyxyz, 4.2, n, 1), 0x1234C6);
 
-//	n.x = 201;
-//	n.y = 0;
-//	n.z = 0;
-//	double pxyz[3] = {200.0, 0.0, 0.0};
-//	//5
-//	rt_plane_obj(&o->obj[4], rt_new_plane(pxyz, n), 0xFFFF00);
+	//5
+	n.x = 0;
+	n.y = 1;
+	n.z = 0;
+	double pxyz[3] = {250.0, 250.0, 0.0};
+	rt_plane_obj(&o->obj[4], rt_new_plane(pxyz, n), 0x00F0F0);
+
+	//6
+	n.x = 0;
+	n.y = -1;
+	n.z = 0;
+	double p2xyz[3] = {250.0, -250.0, 0.0};
+	rt_plane_obj(&o->obj[5], rt_new_plane(p2xyz, n), 0xF0C173);
 
 
-
-//
-//    n.x = -301;
-//    n.y = 0;
-//    n.z = 0;
-//	rt_plane_obj(&o->obj[3], rt_new_plane(-300, 0, 0, n), 0xF0F0F0);
 
 
 

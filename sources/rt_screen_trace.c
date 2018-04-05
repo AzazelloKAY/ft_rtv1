@@ -40,22 +40,22 @@ static t_vec		canv_to_vp(t_vec point, t_img *i, t_cam *c)
 *** TODO remove double calculation of color for shadows RT
 */
 
-int				ray_trace(t_ray *r, t_scene *s, t_rtres *rt)
+int				ray_trace(t_ray *r, t_scene *s, t_rtres *rt, double tlim)
 {
 	int 	i;
 	double	closest_t;
 	t_xy	t;
 	t_obj	*closest_o;
 
-	closest_t = INFINITY;
+	closest_t = tlim;
 	closest_o = NULL;
 	i = s->objnum;
 	while (i--)
 	{
 		t = s->obj[i].intersect(r, s->obj[i].objp);
-		if (f_get_smalest(&t) < 0)//rt.t.x < 0 && rt.t.y < 0)
+		if (f_get_smalest(&t) < 0)
 			continue;
-		if (t.x <= closest_t)
+		if (t.x < closest_t)
 		{
 			rt->t = t;
 			closest_t = t.x;
@@ -87,15 +87,14 @@ void				rt_calc_scren(t_win	*w, t_cam *c, t_scene *s)
 			ray.dir.y = p.y;
 			ray.dir = canv_to_vp(ray.dir, &w->img, c);
 
-			if (ray_trace(&ray, s, &rtres))
+			if (ray_trace(&ray, s, &rtres, INFINITY))
 			{
 				intens = rt_get_light_intensity(ray, s, rtres.t.x);
 
 				//printf(">%6f\n", intens);
 
-				rtres.colr = ft_colr_mul_scal(rtres.colr, intens);
-				if (rtres.colr.val == 0)
-					printf("zero\n");
+				rtres.colr.val = ft_colr_mul_scal(rtres.colr.val, intens);
+
 			}
 			p.colr.val = rtres.colr.val;
 

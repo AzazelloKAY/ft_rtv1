@@ -24,7 +24,7 @@ double	f_get_smalest(t_xy *t)
 		res = t->y;
 	else if (t->y >= 0 && t->y < res)
 	{
-		res = t->y;
+		res = t->y; // Убить тмп заменить на рез
 		tmp = t->y;
 		t->y = t->x;
 		t->x = tmp;

@@ -26,15 +26,24 @@ t_vec		*v_new(t_vec *v)
 	return (res);
 }
 
-double 		v_len(t_vec a, t_vec b)
+//double 		v_len2(t_vec a, t_vec b)
+//{
+//	double	res;
+//	t_vec	t;
+//
+// //	t.x = (b.x - a.x);
+// //	t.y = (b.y - a.y);
+// //	t.z = (b.z - a.z);
+//	t = v_sub(b, a);
+//	res = sqrt((t.x * t.x) + (t.y * t.y) + (t.z * t.z));
+//	return (res);
+//}
+
+double 		v_len1(t_vec a) //v_sub(b, a)
 {
 	double	res;
-	t_vec	t;
 
-	t.x = (b.x - a.x);
-	t.y = (b.y - a.y);
-	t.z = (b.z - a.z);
-	res = sqrt((t.x * t.x) + (t.y * t.y) + (t.z * t.z));
+	res = sqrt((a.x * a.x) + (a.y * a.y) + (a.z * a.z));
 	return (res);
 }
 
@@ -69,6 +78,3 @@ int			v_quad_equ(double a, double b, double c, t_xy *res)
 		*res = re;
 	return (1);
 }
-
-//		((re.x >= 0) ? (d = re.x) : (d = -1));
-//		((re.y >= 0 && re.y < d) ? (d = re.y) : 0);

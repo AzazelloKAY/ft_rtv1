@@ -134,7 +134,7 @@ void			rt_cone_obj(t_obj *o, t_cone *co, uint32_t colr);
 *** rt_screen_trace.c
 */
 
-int				ray_trace(t_ray *r, t_scene *s, t_rtres *rt);
+int				ray_trace(t_ray *r, t_scene *s, t_rtres *rt, double tlim);
 void			rt_calc_scren(t_win	*w, t_cam *c, t_scene *o);
 
 /*

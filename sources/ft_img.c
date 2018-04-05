@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "ft_img.h"
+#include "ft_img.h"
 
 void			ft_pixtoimg(t_img *i, t_point *p)
 {
@@ -54,27 +54,39 @@ void			ft_drawimg(t_win *w)
 	//ft_writhelp(w);
 }
 
-t_color 		ft_colr_add(t_color c1, t_color c2)
+uint32_t 		ft_colr_add(uint32_t colr1, uint32_t colr2)
 {
 	unsigned int t;
+	t_color	c1;
+	t_color	c2;
 
-	c1.chnl.a = ((t = c1.chnl.a + c2.chnl.a) <= 0xFF) ? t : 0xFF;
-	c1.chnl.r = ((t = c1.chnl.r + c2.chnl.r) <= 0xFF) ? t : 0xFF;
-	c1.chnl.g = ((t = c1.chnl.g + c2.chnl.g) <= 0xFF) ? t : 0xFF;
-	c1.chnl.b = ((t = c1.chnl.b + c2.chnl.b) <= 0xFF) ? t : 0xFF;
-	return (c1);
+	c1.val = colr1;
+	c2.val = colr2;
+
+	t = c1.chnl.a + c2.chnl.a;
+	c1.chnl.a = (t <= 0xFF) ? t : 0xFF;
+	t = c1.chnl.r + c2.chnl.r;
+	c1.chnl.r = (t <= 0xFF) ? t : 0xFF;
+	t = c1.chnl.g + c2.chnl.g;
+	c1.chnl.g = (t <= 0xFF) ? t : 0xFF;
+	t = c1.chnl.b + c2.chnl.b;
+	c1.chnl.b = (t <= 0xFF) ? t : 0xFF;
+	return (c1.val);
 }
 
-t_color			ft_colr_mul_scal(t_color c, double n)
+uint32_t			ft_colr_mul_scal(uint32_t colr, double n)
 {
 	double t;
+	t_color	c;
+
+	c.val = colr;
 
 	if (n > 0xFF)
-		c.val = 0xFFFFFF;
+		n = 0xFF;
 	c.chnl.a = ((t = c.chnl.a * n) <= 0xFF) ? (unsigned int)t : 0xFF;
 	c.chnl.r = ((t = c.chnl.r * n) <= 0xFF) ? (unsigned int)t : 0xFF;
 	c.chnl.g = ((t = c.chnl.g * n) <= 0xFF) ? (unsigned int)t : 0xFF;
 	c.chnl.b = ((t = c.chnl.b * n) <= 0xFF) ? (unsigned int)t : 0xFF;
-	return (c);
+	return (c.val);
 
 }

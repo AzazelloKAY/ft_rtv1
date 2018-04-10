@@ -31,6 +31,16 @@ t_xy      rt_sphere_intersect(t_ray *r, void *obj)
 	return (qres);
 }
 
+t_vec		rt_sphere_normal(t_vec dot, void *obj)
+{
+	t_sphere	*s;
+	t_vec		res;
+
+	s = (t_sphere*)obj;
+	res = v_normalise(v_sub(dot, s->centr));
+	return (res);
+}
+
 t_sphere	*rt_new_sphr(double xyz[3], double rad)
 {
 	t_sphere *s;
@@ -48,6 +58,7 @@ void 		rt_sphr_obj(t_obj *o, t_sphere *s, uint32_t colr)
 {
     o->colr.val = colr;
     o->intersect = rt_sphere_intersect;
+	o->getnormal = rt_sphere_normal;
     o->objp = s;
 }
 

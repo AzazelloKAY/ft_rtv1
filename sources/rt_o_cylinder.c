@@ -33,6 +33,19 @@ t_xy		rt_cylindr_intersect(t_ray *r, void *obj)
 	return (res);
 }
 
+t_vec		rt_cylindr_normal(t_vec dot, void *obj)
+{
+	t_cylinder	*c;
+	t_vec		res;
+
+	c = (t_cylinder*)obj;
+
+	res = v_sub(dot, c->c);
+	res = v_mul_scal(c->v, v_dotprod(res, c->v));
+	res = v_sub(dot, res);
+	return (v_normalise(res));
+}
+
 t_cylinder	*rt_new_cylindr(double xyz[3], double rad, t_vec v, double mxm)
 {
     t_cylinder *cy;
@@ -52,5 +65,6 @@ void 		rt_cylindr_obj(t_obj *o, t_cylinder *cy, uint32_t colr)
 {
 	o->colr.val = colr;
 	o->intersect = rt_cylindr_intersect;
+	o->getnormal = rt_cylindr_normal;
 	o->objp = cy;
 }

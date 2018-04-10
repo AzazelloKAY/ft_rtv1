@@ -39,13 +39,13 @@ int main()
 	o = rt_new_obj_arr(6, 3);
 
 	//AMBI LIGHT
-	rt_set_ambi_light(&o->light[0], 0.2);
+	rt_set_ambi_light(&o->light[0], 0.19);
 	//POINT LIGHT
 	double		lxyz[3] = {150, 10, 400};//{-150.0, 150, 150};
-	rt_set_point_light(&o->light[1], lxyz, 0.4, 0);
+	rt_set_point_light(&o->light[1], lxyz, 0.6, 0);
 
 	double		l2xyz[3] = {-20, -50, -10};//{-150.0, 150, 150};
-	rt_set_point_light(&o->light[2], l2xyz, 0.3, 0);
+	rt_set_point_light(&o->light[2], l2xyz, 0.6, 0);
 
 	//1
 	double s1xyz[3] = {20, 0, 490};

@@ -33,6 +33,14 @@ t_xy		rt_plane_intersect(t_ray *r, void *obj)
 	return (res);
 }
 
+t_vec		rt_plane_normal(t_vec dot, void *obj)
+{
+	t_plane		*p;
+
+	p = (t_plane*)obj;
+	return (p->n);
+}
+
 t_plane		*rt_new_plane(double xyz[3], t_vec n)
 {
 	t_plane *p;
@@ -50,5 +58,6 @@ void        rt_plane_obj(t_obj *o, t_plane *p, uint32_t colr)
 {
 	o->colr.val = colr;
 	o->intersect = rt_plane_intersect;
+	o->getnormal = rt_plane_normal;
 	o->objp = p;
 }

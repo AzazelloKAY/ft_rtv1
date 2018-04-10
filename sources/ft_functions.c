@@ -15,19 +15,21 @@
 double	f_get_smalest(t_xy *t)
 {
 	double res;
-	double tmp;
 
 	res = -1;
 	if (t->x < 0 && t->y < 0)
 		return (res);
 	if ((res = t->x) < 0)
+	{
 		res = t->y;
+		t->y = t->x;
+		t->x = res;
+	}
 	else if (t->y >= 0 && t->y < res)
 	{
-		res = t->y; // Убить тмп заменить на рез
-		tmp = t->y;
+		res = t->y;
 		t->y = t->x;
-		t->x = tmp;
+		t->x = res;
 	}
 	return (res);
 }

@@ -80,6 +80,7 @@ typedef struct	s_obj
 {
 	void	*objp;
     t_xy	(*intersect)(t_ray *r,  void *obj);
+	t_vec	(*getnormal)(t_vec dot, void *obj);
 	t_color	colr;
 
 }				t_obj;
@@ -90,12 +91,14 @@ typedef struct	s_scene
 	t_obj	*obj;
 	int		lnum;
 	t_light	*light;
+	double	minlight;
 }				t_scene;
 
 typedef struct	s_rtres
 {
 	t_xy	t;
 	t_color	colr;
+	t_obj	*obj;
 }				t_rtres;
 
 /*
@@ -141,21 +144,21 @@ void			rt_calc_scren(t_win	*w, t_cam *c, t_scene *o);
 *** rt_obj.c
 */
 
-t_scene		*rt_new_obj_arr(int onum, int lnum);
+t_scene			*rt_new_obj_arr(int onum, int lnum);
+void			rt_set_ambi_light(t_light *l, double i);
+void			rt_set_point_light(t_light *l, double xyz[3], double i, double f);
 
 /*
 *** rt_light.c
 */
 
-void		rt_set_ambi_light(t_light *l, double i);
-void		rt_set_point_light(t_light *l, double xyz[3], double i, double f);
-double		rt_get_light_intensity(t_ray r, t_scene *s, double t);
-
+//double			rt_get_l_intensity(t_ray r, t_scene *s, double t);
+double			rt_calc_light(t_ray ray, t_scene *s, t_rtres rtres);
 
 /*
 ***
 */
 
-double		f_get_smalest(t_xy *t);
+double			f_get_smalest(t_xy *t);
 
 #endif

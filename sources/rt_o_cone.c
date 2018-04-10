@@ -59,5 +59,6 @@ void		rt_cone_obj(t_obj *o, t_cone *co, uint32_t colr)
 {
 	o->colr.val = colr;
 	o->intersect = rt_cone_intersect;
+	o->getnormal = NULL;
 	o->objp = co;
 }

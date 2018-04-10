@@ -44,11 +44,34 @@ t_scene				*rt_new_obj_arr(int onum, int lnum)
 		return (NULL);
 	scene->objnum = onum;
 	scene->obj = rt_new_obj(onum);
+	scene->minlight = 0.0;
 	if (lnum > 0)
 	{
 		scene->lnum = lnum;
 		scene->light = rt_new_light(lnum);
+		scene->minlight = 1.0;
 	}
 	return (scene);
 }
 
+void				rt_set_ambi_light(t_light *l, double i)
+{
+	l->type = e_ambient;
+	l->cntr.x = 0;
+	l->cntr.y = 0;
+	l->cntr.z = 0;
+	l->colr.val = 0xFFFFFF;
+	l->intens = i;
+	l->fading = 0;
+}
+
+void				rt_set_point_light(t_light *l, double xyz[3], double i, double f)
+{
+	l->type = e_point;
+	l->cntr.x = xyz[0];
+	l->cntr.y = xyz[1];
+	l->cntr.z = xyz[2];
+	l->colr.val = 0xFFFFFF;
+	l->intens = i;
+	l->fading = f;
+}

@@ -63,7 +63,7 @@ int				ray_trace(t_ray *r, t_scene *s, t_rtres *rt, double tlim)
 		}
 	}
 	rt->colr.val = (closest_o != NULL) ? closest_o->colr.val : 0;
-	if (closest_o != NULL)
+	if ((rt->obj = closest_o) != NULL)
 		return (1);
 	return (0);
 }
@@ -73,7 +73,6 @@ void				rt_calc_scren(t_win	*w, t_cam *c, t_scene *s)
 	t_point	p;
 	t_rtres	rtres;
 	t_ray	ray;
-	double	intens;
 
 	ray.or = c->orig;
 	p.y = w->img.maxh;
@@ -89,18 +88,11 @@ void				rt_calc_scren(t_win	*w, t_cam *c, t_scene *s)
 
 			if (ray_trace(&ray, s, &rtres, INFINITY))
 			{
-				intens = rt_get_light_intensity(ray, s, rtres.t.x);
-
-				//printf(">%6f\n", intens);
-
-				rtres.colr.val = ft_colr_mul_scal(rtres.colr.val, intens);
+				rtres.colr.val = ft_colr_mul_scal(rtres.colr.val,//intens);
+					rt_calc_light(ray, s, rtres));
 
 			}
 			p.colr.val = rtres.colr.val;
-
-			//calculate light intensity thru every object on scene to every light source
-			//ray.or = c->orig + t * ray.dir;
-			//ray.dir = every light sourse point
 
 			ft_pixtoimg_shift(&w->img, &p);
 			p.x++;

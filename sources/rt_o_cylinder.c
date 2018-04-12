@@ -37,12 +37,21 @@ t_vec		rt_cylindr_normal(t_vec dot, void *obj)
 {
 	t_cylinder	*c;
 	t_vec		res;
+	t_vec		v;
+	double		len;
 
 	c = (t_cylinder*)obj;
 
 	res = v_sub(dot, c->c);
-	res = v_mul_scal(c->v, v_dotprod(res, c->v));
-	res = v_sub(dot, res);
+	len = v_dotprod(res, c->v);
+	v = c->v;
+	if (len < 0)
+	{
+		v = v_mul_scal(v, -1);
+		len = -len;
+	}
+	v = v_mul_scal(v, len);
+	res = v_sub(res, v);
 	return (v_normalise(res));
 }
 

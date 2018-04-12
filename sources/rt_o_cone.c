@@ -39,6 +39,30 @@ t_xy		rt_cone_intersect(t_ray *r, void *obj)
 	return (res);
 }
 
+t_vec		rt_cone_normal(t_vec dot, void *obj)
+{
+	t_cone		*c;
+	t_vec		res;
+	t_vec		v;
+	double		len;
+
+	c = (t_cone*)obj;
+	res = v_sub(dot, c->c);
+	len = v_dotprod(res, c->v);
+	v = c->v;
+	if (len < 0) //???????????????????
+	{
+		v = v_mul_scal(v, -1);
+		len = -len;
+	}
+	v = v_mul_scal(v, len);
+	v = v_mul_scal(v, 1 + (c->k * c->k));
+	res = v_sub(res, v);
+
+
+	return (v_normalise(res));
+}
+
 t_cone		*rt_new_cone(double xyz[3], t_vec v, double k_minm_maxm[3])
 {
 	t_cone *co;
@@ -59,6 +83,6 @@ void		rt_cone_obj(t_obj *o, t_cone *co, uint32_t colr)
 {
 	o->colr.val = colr;
 	o->intersect = rt_cone_intersect;
-	o->getnormal = NULL;
+	o->getnormal = rt_cone_normal;
 	o->objp = co;
 }

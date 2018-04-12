@@ -39,24 +39,24 @@ int main()
 	o = rt_new_obj_arr(6, 3);
 
 	//AMBI LIGHT
-	rt_set_ambi_light(&o->light[0], 0.19);
+	rt_set_ambi_light(&o->light[0], 0.18);
 	//POINT LIGHT
-	double		lxyz[3] = {150, 10, 400};//{-150.0, 150, 150};
-	rt_set_point_light(&o->light[1], lxyz, 0.6, 0);
+	double		lxyz[3] = {150, 20, 400};//{-150.0, 150, 150};
+	rt_set_point_light(&o->light[1], lxyz, 0.55, 0);
 
-	double		l2xyz[3] = {-20, -50, -10};//{-150.0, 150, 150};
-	rt_set_point_light(&o->light[2], l2xyz, 0.6, 0);
+	double		l2xyz[3] = {50, -200, -100};//{-150.0, 150, 150};
+	rt_set_point_light(&o->light[2], l2xyz, 0.3, 0);
 
 	//1
-	double s1xyz[3] = {20, 0, 490};
+	double s1xyz[3] = {60, 0, 490};
 	rt_sphr_obj(&o->obj[0], rt_new_sphr(s1xyz, 60), 0x00FF00);
 	//2
 	double s2xyz[3] = {-20, 0, 500};
-	rt_sphr_obj(&o->obj[1], rt_new_sphr(s2xyz, 70), 0xFF0000);
+	rt_sphr_obj(&o->obj[1], rt_new_sphr(s2xyz, 50), 0xFF0000);
 
 	//3
 	t_vec v;
-	v.x = 0;
+	v.x = -100;
 	v.y = 100;
 	v.z = 0;
 	double coxyz[3] = {20.0, -100.0, 540.0};
@@ -66,11 +66,11 @@ int main()
 
 	//4
 	t_vec n;
-	n.x = 180;
-	n.y = 130;
+	n.x = 200;
+	n.y = 100;
 	n.z = 500;
-	double cyxyz[3] = {10.0, 2.0, 200.0};
-	rt_cylindr_obj(&o->obj[3], rt_new_cylindr(cyxyz, 4.2, n, 1), 0x1234C6);
+	double cyxyz[3] = {-150.0, -100.0, 100.0};
+	rt_cylindr_obj(&o->obj[3], rt_new_cylindr(cyxyz, 9.2, n, 1), 0x1234C6);
 
 	//5
 	n.x = 0;

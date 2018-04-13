@@ -85,4 +85,5 @@ void		rt_cone_obj(t_obj *o, t_cone *co, uint32_t colr)
 	o->intersect = rt_cone_intersect;
 	o->getnormal = rt_cone_normal;
 	o->objp = co;
+	o->shine = 2.0;
 }

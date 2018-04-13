@@ -54,7 +54,7 @@ void			ft_drawimg(t_win *w)
 	//ft_writhelp(w);
 }
 
-uint32_t 		ft_colr_add(uint32_t colr1, uint32_t colr2)
+uint32_t 		colr_add(uint32_t colr1, uint32_t colr2)
 {
 	unsigned int t;
 	t_color	c1;
@@ -74,7 +74,7 @@ uint32_t 		ft_colr_add(uint32_t colr1, uint32_t colr2)
 	return (c1.val);
 }
 
-uint32_t			ft_colr_mul_scal(uint32_t colr, double n)
+uint32_t		colr_scal(uint32_t colr, double n)
 {
 	double t;
 	t_color	c;

@@ -34,7 +34,7 @@ static t_light		*rt_new_light(int lnum)
 	return (l);
 }
 
-t_scene				*rt_new_obj_arr(int onum, int lnum)
+t_scene				*rt_new_scene(int onum, int lnum)
 {
 	t_scene	*scene;
 

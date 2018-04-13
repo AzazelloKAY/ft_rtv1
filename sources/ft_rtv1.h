@@ -82,6 +82,7 @@ typedef struct	s_obj
     t_xy	(*intersect)(t_ray *r,  void *obj);
 	t_vec	(*getnormal)(t_vec dot, void *obj);
 	t_color	colr;
+	double	shine;
 
 }				t_obj;
 
@@ -92,6 +93,7 @@ typedef struct	s_scene
 	int		lnum;
 	t_light	*light;
 	double	minlight;
+	t_cam	*cam;
 }				t_scene;
 
 typedef struct	s_rtres
@@ -144,7 +146,7 @@ void			rt_calc_scren(t_win	*w, t_cam *c, t_scene *o);
 *** rt_obj.c
 */
 
-t_scene			*rt_new_obj_arr(int onum, int lnum);
+t_scene			*rt_new_scene(int onum, int lnum);
 void			rt_set_ambi_light(t_light *l, double i);
 void			rt_set_point_light(t_light *l, double xyz[3], double i, double f);
 
@@ -153,7 +155,7 @@ void			rt_set_point_light(t_light *l, double xyz[3], double i, double f);
 */
 
 //double			rt_get_l_intensity(t_ray r, t_scene *s, double t);
-double			rt_calc_light(t_ray ray, t_scene *s, t_rtres rtres);
+uint32_t		rt_calc_light(t_ray ray, t_scene *s, t_rtres rtres);
 
 /*
 ***

@@ -60,6 +60,7 @@ void 		rt_sphr_obj(t_obj *o, t_sphere *s, uint32_t colr)
     o->intersect = rt_sphere_intersect;
 	o->getnormal = rt_sphere_normal;
     o->objp = s;
+	o->shine = 2.0;
 }
 
 /*

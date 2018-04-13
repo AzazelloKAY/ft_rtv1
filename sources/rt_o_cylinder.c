@@ -76,4 +76,5 @@ void 		rt_cylindr_obj(t_obj *o, t_cylinder *cy, uint32_t colr)
 	o->intersect = rt_cylindr_intersect;
 	o->getnormal = rt_cylindr_normal;
 	o->objp = cy;
+	o->shine = 2.0;
 }

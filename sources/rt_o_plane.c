@@ -63,4 +63,5 @@ void        rt_plane_obj(t_obj *o, t_plane *p, uint32_t colr)
 	o->intersect = rt_plane_intersect;
 	o->getnormal = rt_plane_normal;
 	o->objp = p;
+	o->shine = 2.0;
 }

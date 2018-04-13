@@ -88,8 +88,7 @@ void				rt_calc_scren(t_win	*w, t_cam *c, t_scene *s)
 
 			if (ray_trace(&ray, s, &rtres, INFINITY))
 			{
-				rtres.colr.val = ft_colr_mul_scal(rtres.colr.val,//intens);
-					rt_calc_light(ray, s, rtres));
+				rtres.colr.val = rt_calc_light(ray, s, rtres);//ft_colr_mul_scal(rtres.colr.val, rt_calc_light(ray, s, rtres));
 
 			}
 			p.colr.val = rtres.colr.val;

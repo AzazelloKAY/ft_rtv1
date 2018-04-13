@@ -30,22 +30,25 @@ int main()
 
 	t_scene		*o;
 	t_win		*w;
-	t_cam		*c;
+	t_cam		*cam;
 
 	w = ft_init_mlx("test rtv");
 	ft_init_img(w);
-	c = cam_new(0, 0, -1, 95);
+	cam = cam_new(0, 0, -1, 95);
 
-	o = rt_new_obj_arr(6, 3);
+	o = rt_new_scene(6, 3);
+	o->cam = cam;
 
 	//AMBI LIGHT
 	rt_set_ambi_light(&o->light[0], 0.18);
 	//POINT LIGHT
-	double		lxyz[3] = {150, 20, 400};//{-150.0, 150, 150};
-	rt_set_point_light(&o->light[1], lxyz, 0.55, 0);
+	double		lxyz[3] = {50, 20, 600};//{-150.0, 150, 150};
+	rt_set_point_light(&o->light[1], lxyz, 0.45, 0);
+	o->light[1].colr.val = 0x0000ff;
 
 	double		l2xyz[3] = {50, -200, -100};//{-150.0, 150, 150};
-	rt_set_point_light(&o->light[2], l2xyz, 0.3, 0);
+	rt_set_point_light(&o->light[2], l2xyz, 0.2, 0);
+	o->light[2].colr.val = 0xFFFFff;
 
 	//1
 	double s1xyz[3] = {60, 0, 490};
@@ -92,7 +95,7 @@ int main()
 
 
 
-	rt_calc_scren(w, c, o);
+	rt_calc_scren(w, o->cam, o);
 
 	ft_drawimg(w);
 

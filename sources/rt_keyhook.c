@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_img_keyhook.c                                   :+:      :+:    :+:   */
+/*   rt_keyhook.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akokoshk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/17 21:55:41 by akokoshk          #+#    #+#             */
-/*   Updated: 2018/03/18 17:27:52 by akokoshk         ###   ########.fr       */
+/*   Updated: 2018/04/15 17:58:13 by akokoshk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "ft_img.h"
+#include "ft_rtv1.h"
 
 //static void		ft_key1(int keycode, t_fract *f)
 //{
@@ -65,10 +65,27 @@
 //	return (0);
 //}
 
-static int		ft_keycatch(int keycode, t_win *w)
+static int		ft_keycatch(int keycode, t_scene *sc)
 {
-	if (keycode == 53)
-		ft_exit_x(w);
+
+//	c->ang.x = 0; //++up; --down;
+//	c->ang.y = -95; //++left; --right;
+//	c->ang.z = 00; //++clockwise; --counterclockwise;
+
+	if (keycode == e_key_esc)
+		ft_exit_x(sc->w);
+	else if (keycode == e_key_up)
+		sc->cam->ang.x += (sc->cam->ang.x <= 85) ? 5 : 0;
+	else if (keycode == e_key_down)
+		sc->cam->ang.x -= (sc->cam->ang.x >= -85) ? 5 : 0;
+	else if (keycode == e_key_left)
+		sc->cam->ang.y += (sc->cam->ang.y <= 5000) ? 5 : 0;
+	else if (keycode == e_key_right)
+		sc->cam->ang.y -= (sc->cam->ang.y >= -5000) ? 5 : 0;
+
+	if (keycode == e_key_up || keycode == e_key_down
+		|| keycode == e_key_left || keycode == e_key_right)
+		sc->cam->rad = calc_radians(sc->cam->ang);
 //	else if (keycode == 24 || keycode == 69)
 //	{
 //		f->zoom *= (f->zoom < FT_ZOOMMAX) ? FT_ZOOMSTP : 1;
@@ -83,19 +100,17 @@ static int		ft_keycatch(int keycode, t_win *w)
 //	}
 //	ft_key1(keycode, f);
 //	f->fract_lonch(f);
+	rt_redraw(sc);
 	return (0);
 }
 
-void			ft_keyhookloop(t_win *w, void *dat)
+void			ft_keyhookloop(t_scene *sc)
 {
-
-	dat = (void*)0;
-
-	mlx_hook(w->win, 2, 0, ft_keycatch, w);
+	mlx_hook(sc->w->win, 2, 0, ft_keycatch, sc);
 //	mlx_hook(w->win, 4, 5, ft_mouse_hook, dat);
 //	mlx_hook(w->win, 6, 1L << 6, ft_mouse_mov, dat);
-	mlx_hook(w->win, 17, 1L << 17, ft_exit_x, w);
-	mlx_loop(w->mlx);
+	mlx_hook(sc->w->win, 17, 1L << 17, ft_exit_x, sc->w);
+	mlx_loop(sc->w->mlx);
 }
 
 

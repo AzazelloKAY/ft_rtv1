@@ -6,7 +6,7 @@
 /*   By: akokoshk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 21:32:56 by akokoshk          #+#    #+#             */
-/*   Updated: 2018/03/21 20:27:50 by akokoshk         ###   ########.fr       */
+/*   Updated: 2018/04/15 17:03:05 by akokoshk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ t_scene				*rt_new_scene(int onum, int lnum)
 	scene->objnum = onum;
 	scene->obj = rt_new_obj(onum);
 	scene->minlight = 0.0;
+	scene->w = NULL;
+	scene->cam = NULL;
 	if (lnum > 0)
 	{
 		scene->lnum = lnum;

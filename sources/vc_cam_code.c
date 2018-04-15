@@ -6,7 +6,7 @@
 /*   By: akokoshk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 20:39:07 by akokoshk          #+#    #+#             */
-/*   Updated: 2018/03/21 19:59:22 by akokoshk         ###   ########.fr       */
+/*   Updated: 2018/04/15 17:45:37 by akokoshk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_cam	*cam_new(double x, double y, double z, double fov)
 	c->vpw = 1;
 	c->tmin = 0;
 	c->tmax = INFINITY;
+
 
 	return (c);
 }

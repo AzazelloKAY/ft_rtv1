@@ -6,7 +6,7 @@
 /*   By: akokoshk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 20:46:57 by akokoshk          #+#    #+#             */
-/*   Updated: 2018/03/23 21:57:06 by akokoshk         ###   ########.fr       */
+/*   Updated: 2018/04/15 17:27:42 by akokoshk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ typedef struct	s_scene
 	t_light	*light;
 	double	minlight;
 	t_cam	*cam;
+	t_win	*w;
 }				t_scene;
 
 typedef struct	s_rtres
@@ -162,5 +163,17 @@ uint32_t		rt_calc_light(t_ray ray, t_scene *s, t_rtres rtres);
 */
 
 double			f_get_smalest(t_xy *t);
+
+/*
+*** ft_img_keyhook.c
+*/
+
+void			ft_keyhookloop(t_scene *sc);
+
+/*
+*** main
+*/
+
+void			rt_redraw(t_scene *sc);
 
 #endif

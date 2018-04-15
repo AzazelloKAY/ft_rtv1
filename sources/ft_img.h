@@ -6,7 +6,7 @@
 /*   By: akokoshk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/17 21:19:45 by akokoshk          #+#    #+#             */
-/*   Updated: 2018/03/19 22:05:40 by akokoshk         ###   ########.fr       */
+/*   Updated: 2018/04/15 17:41:25 by akokoshk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,41 @@
 # define WINHEIGHT 600
 # define WINWIDTH 900
 
+typedef enum		e_keycode
+{
+	e_key_esc = 53,
+	e_key_space = 49,
+	e_key_entr = 36,
+	e_key_up = 126,
+	e_key_left = 123,
+	e_key_down = 125,
+	e_key_right = 124,
+	e_key_lsift = 257,
+	e_key_lctrl = 256,
+	e_key_tab = 48,
+	e_key_lalt = 261,
+	e_key_lcmd = 259,
+	e_key_w = 13,
+	e_key_a = 0,
+	e_key_s = 1,
+	e_key_d = 2,
+	e_keynum_up = 91,
+	e_keynum_down = 84,
+	e_keynum_right = 88,
+	e_keynum_left = 86,
+	e_keynum_centre = 87,
+	e_keynum_upleft = 89,
+	e_keynum_upright = 92,
+	e_keynum_dwnleft = 83,
+	e_keynum_dwnright = 85,
+	e_keynum_zero = 82,
+	e_keynum_entr = 76,
+	e_keynum_plus = 69,
+	e_keynum_minus = 78,
+	e_keynum_mult = 67,
+	e_keynum_div = 75,
+	e_keynum_equal = 81,
+}					t_keycode;
 
 typedef struct		s_colorchannels
 {
@@ -86,11 +121,5 @@ int				fr_remake_img(t_win *w);
 int				ft_init_img(t_win *w);
 void			ft_destroy_all(t_win *w);
 int				ft_exit_x(t_win *w);
-
-/*
-*** ft_img_keyhook.c
-*/
-
-void			ft_keyhookloop(t_win *w, void *dat);
 
 #endif

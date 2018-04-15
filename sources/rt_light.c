@@ -6,7 +6,7 @@
 /*   By: akokoshk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 21:15:05 by akokoshk          #+#    #+#             */
-/*   Updated: 2018/03/22 21:15:05 by akokoshk         ###   ########.fr       */
+/*   Updated: 2018/04/15 18:13:38 by akokoshk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static double	rt_get_shine(t_vec view, t_vec light, t_vec norm, double sh)
 {
-	t_vec	refl;
+	//t_vec	refl;
 	double	res;
 
 	t_vec	h;
@@ -43,7 +43,7 @@ t_xy			rt_get_l_intensity(t_ray ray, t_light *l, t_scene *s, t_vec norm)
 	t_vec	l_dir;
 	t_xy	res;
 	double	diff;
-	double	shine;
+	//double	shine;
 
 	res.x = 0.0;
 	res.y = 0.0;
@@ -55,7 +55,6 @@ t_xy			rt_get_l_intensity(t_ray ray, t_light *l, t_scene *s, t_vec norm)
 
 	diff = v_dotprod(norm, ray.dir);
 	res.x *= (diff >= 0) ? diff : 1;
-
 
 
 	res.y = rt_get_shine(v_sub(s->cam->orig, ray.or), ray.dir, norm, 80.0);
@@ -89,7 +88,7 @@ uint32_t		rt_calc_light(t_ray ray, t_scene *s, t_rtres rtres)
 		{
 			dif_shin = rt_get_l_intensity(ray, &s->light[i], s, normale);
 			res.t.x += dif_shin.x;
-			res.colr.val = colr_scal(colr_add(res.colr.val ,colr_scal(s->light[i].colr.val, dif_shin.y)), dif_shin.x);
+			res.colr.val = colr_add(res.colr.val, colr_scal(colr_scal(s->light[i].colr.val, dif_shin.y), dif_shin.x));
 		}
 		else if (s->light[i].type == e_ambient)
 			res.t.x += s->light[i].intens;

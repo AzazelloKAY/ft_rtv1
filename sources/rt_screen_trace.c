@@ -6,7 +6,7 @@
 /*   By: akokoshk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 20:11:50 by akokoshk          #+#    #+#             */
-/*   Updated: 2018/04/15 16:22:57 by akokoshk         ###   ########.fr       */
+/*   Updated: 2018/04/15 17:31:11 by akokoshk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,12 @@ static t_vec		cam_to_vp(t_point scren_point, t_img *i, t_cam *c)
 	view_dir.y = scren_point.y * (c->vph / i->h) * c->fov;
 	view_dir.z = c->dir.z;
 
-
-//	Matrix44f cameraToWorld;
-//	cameraToWorld.set(...); // set matrix
-//	Vec3f rayOriginWorld, rayPWorld;
-//	cameraToWorld.multVectMatrix(rayOrigin, rayOriginWorld);
-//	cameraToWorld.multVectMatrix(Vec3f(Px, Py, -1), rayPWorld);
-//	Vec3f rayDirection = rayPWorld - rayOriginWorld;
-
 	view_dir = v_sub(view_dir, c->orig);
 
 
-	c->ang.x = 10; //++up; --down;
-	c->ang.y = 00; //++left; --right;
-	c->ang.z = 00; //++clockwise; --counterclockwise;
+//	c->ang.x = 0; //++up; --down;
+//	c->ang.y = -95; //++left; --right;
+//	c->ang.z = 00; //++clockwise; --counterclockwise;
 	view_dir = rotate_vec(view_dir, calc_radians(c->ang));
 
 

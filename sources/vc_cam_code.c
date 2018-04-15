@@ -21,6 +21,10 @@ t_cam	*cam_new(double x, double y, double z, double fov)
 	c->orig.x = x;
 	c->orig.y = y;
 	c->orig.z = z;
+	c->dir.x = 0;
+	c->dir.y = 0;
+	c->dir.z = 1;
+	c->dir = v_normalise(c->dir);
 	c->fov = tan(((fov / 2) * M_PI) / 180);
 	c->vph = 1;
 	c->vpw = 1;

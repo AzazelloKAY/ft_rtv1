@@ -6,7 +6,7 @@
 /*   By: akokoshk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/17 21:09:32 by akokoshk          #+#    #+#             */
-/*   Updated: 2018/03/26 19:16:30 by akokoshk         ###   ########.fr       */
+/*   Updated: 2018/04/15 15:59:45 by akokoshk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ typedef struct		s_ray
 typedef struct		s_cam
 {
 	t_vec	orig;
-	t_vec	angle;
+	t_vec	dir;
+	t_vec	ang;
+	t_vec	rad;
 	double	fov;
 	double	vph;
 	double	vpw;
@@ -73,5 +75,12 @@ int			v_quad_equ(double a, double b, double c, t_xy *res);
 */
 
 t_cam		*cam_new(double x, double y, double z, double fov);
+
+/*
+*** vc_rotation.c
+*/
+
+t_vec		rotate_vec(t_vec v, t_vec rad);
+t_vec		calc_radians(t_vec angle);
 
 #endif

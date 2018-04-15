@@ -34,7 +34,7 @@ int main()
 
 	w = ft_init_mlx("test rtv");
 	ft_init_img(w);
-	cam = cam_new(0, 0, -1, 95);
+	cam = cam_new(0, 0, -0.5, 95);
 
 	o = rt_new_scene(6, 3);
 	o->cam = cam;
@@ -47,7 +47,7 @@ int main()
 	o->light[1].colr.val = 0x0000ff;
 
 	double		l2xyz[3] = {50, -200, -100};//{-150.0, 150, 150};
-	rt_set_point_light(&o->light[2], l2xyz, 0.2, 0);
+	rt_set_point_light(&o->light[2], l2xyz, 0.43, 0);
 	o->light[2].colr.val = 0xFFFFff;
 
 	//1

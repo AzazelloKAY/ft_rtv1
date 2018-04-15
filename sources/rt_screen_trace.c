@@ -6,21 +6,22 @@
 /*   By: akokoshk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 20:11:50 by akokoshk          #+#    #+#             */
-/*   Updated: 2018/03/26 19:29:27 by akokoshk         ###   ########.fr       */
+/*   Updated: 2018/04/15 16:22:57 by akokoshk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_rtv1.h"
 
-static t_vec		canv_to_vp(t_vec point, t_img *i, t_cam *c)
+static t_vec		cam_to_vp(t_point scren_point, t_img *i, t_cam *c)
 {
-	t_vec	v;
+	t_vec	view_dir;
 	double	screnratio;
 
 	screnratio = ((double)i->w / (double)i->h);
-	v.x = point.x * (c->vpw / i->w) * screnratio * c->fov;
-	v.y = point.y * (c->vph / i->h) * c->fov;
-	v.z = point.z;
+
+	view_dir.x = scren_point.x * (c->vpw / i->w) * screnratio * c->fov;
+	view_dir.y = scren_point.y * (c->vph / i->h) * c->fov;
+	view_dir.z = c->dir.z;
 
 
 //	Matrix44f cameraToWorld;
@@ -30,10 +31,17 @@ static t_vec		canv_to_vp(t_vec point, t_img *i, t_cam *c)
 //	cameraToWorld.multVectMatrix(Vec3f(Px, Py, -1), rayPWorld);
 //	Vec3f rayDirection = rayPWorld - rayOriginWorld;
 
-	v = v_sub(v, c->orig);
-	v = v_normalise(v);
+	view_dir = v_sub(view_dir, c->orig);
 
-	return (v);
+
+	c->ang.x = 10; //++up; --down;
+	c->ang.y = 00; //++left; --right;
+	c->ang.z = 00; //++clockwise; --counterclockwise;
+	view_dir = rotate_vec(view_dir, calc_radians(c->ang));
+
+
+
+	return (v_normalise(view_dir));
 }
 
 /*
@@ -62,7 +70,10 @@ int				ray_trace(t_ray *r, t_scene *s, t_rtres *rt, double tlim)
 			closest_o = &s->obj[i];
 		}
 	}
-	rt->colr.val = (closest_o != NULL) ? closest_o->colr.val : 0;
+
+	//rt->colr.val = (closest_o != NULL) ? closest_o->colr.val : 0;
+	rt->colr.val = 0;
+
 	if ((rt->obj = closest_o) != NULL)
 		return (1);
 	return (0);
@@ -76,20 +87,20 @@ void				rt_calc_scren(t_win	*w, t_cam *c, t_scene *s)
 
 	ray.or = c->orig;
 	p.y = w->img.maxh;
-	ray.dir.z = c->orig.z + 1;		//distance to camera // calculate it
+	//ray.dir.z = c->orig.z + 1;		//distance to camera // calculate it
 	while (p.y > w->img.minh)
 	{
 		p.x = w->img.minw;
 		while (p.x < w->img.maxw)
 		{
-			ray.dir.x = p.x;
-			ray.dir.y = p.y;
-			ray.dir = canv_to_vp(ray.dir, &w->img, c);
+			/*ray.dir.x = p.x;
+			ray.dir.y = p.y;*/
+			ray.dir = cam_to_vp(p/*ray.dir*/, &w->img, c);
 
 			if (ray_trace(&ray, s, &rtres, INFINITY))
 			{
-				rtres.colr.val = rt_calc_light(ray, s, rtres);//ft_colr_mul_scal(rtres.colr.val, rt_calc_light(ray, s, rtres));
-
+				//ft_colr_mul_scal(rtres.colr.val, rt_calc_light(ray, s, rtres));
+				rtres.colr.val = rt_calc_light(ray, s, rtres);
 			}
 			p.colr.val = rtres.colr.val;
 

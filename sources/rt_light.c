@@ -58,8 +58,7 @@ t_xy			rt_get_l_intensity(t_ray ray, t_light *l, t_scene *s, t_vec norm)
 
 
 
-	res.y = rt_get_shine(v_sub(s->cam->orig, ray.or), ray.dir, norm, 50.0);
-	//res = (shine >= 0) ? res * shine : res;
+	res.y = rt_get_shine(v_sub(s->cam->orig, ray.or), ray.dir, norm, 80.0);
 
 	return (res);
 }
@@ -73,7 +72,7 @@ uint32_t		rt_calc_light(t_ray ray, t_scene *s, t_rtres rtres)
 	t_xy		dif_shin;
 
 	if (rtres.t.x < 0)
-		return (s->minlight);
+		return (0);//s->minlight);
 	ray.or = v_add(ray.or, v_mul_scal(ray.dir, rtres.t.x - 0.000000001));
 
 	normale = rtres.obj->getnormal(ray.or, rtres.obj->objp);
@@ -97,5 +96,5 @@ uint32_t		rt_calc_light(t_ray ray, t_scene *s, t_rtres rtres)
 		i++;
 	}
 
-	return (colr_add(colr_scal(rtres.colr.val, res.t.x), res.colr.val));
+	return (colr_add(colr_scal(rtres.obj->colr.val, res.t.x), res.colr.val));
 }

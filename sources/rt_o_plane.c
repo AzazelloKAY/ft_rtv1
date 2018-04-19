@@ -13,7 +13,7 @@
 #include "ft_rtv1.h"
 
 
-t_xy		rt_plane_intersect(t_ray *r, void *obj)
+t_xy		rt_plane_intersect(t_ray r, void *obj)
 {
 	t_plane		*p;
     t_xy		ab;
@@ -23,10 +23,10 @@ t_xy		rt_plane_intersect(t_ray *r, void *obj)
     res.y = -1;
 	p = (t_plane*)obj;
 
-	ab.y = v_dotprod(p->n, r->dir);
+	ab.y = v_dotprod(p->n, r.dir);
 	if (ab.y >= 0.00000000000001)
 	{
-		ab.x = v_dotprod(p->n, v_sub(r->or, p->o));
+		ab.x = v_dotprod(p->n, v_sub(r.or, p->o));
 		res.x = -ab.x / ab.y;
 		res.y = res.x;
 	}

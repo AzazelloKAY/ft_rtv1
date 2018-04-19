@@ -75,13 +75,13 @@ static int		ft_keycatch(int keycode, t_scene *sc)
 	if (keycode == e_key_esc)
 		ft_exit_x(sc->w);
 	else if (keycode == e_key_up)
-		sc->cam->ang.x += (sc->cam->ang.x <= 85) ? 5 : 0;
+		sc->cam->ang.x += (sc->cam->ang.x <= 85) ? 15 : 0;
 	else if (keycode == e_key_down)
-		sc->cam->ang.x -= (sc->cam->ang.x >= -85) ? 5 : 0;
+		sc->cam->ang.x -= (sc->cam->ang.x >= -85) ? 15 : 0;
 	else if (keycode == e_key_left)
-		sc->cam->ang.y += (sc->cam->ang.y <= 5000) ? 5 : 0;
+		sc->cam->ang.y += (sc->cam->ang.y <= 5000) ? 15 : 0;
 	else if (keycode == e_key_right)
-		sc->cam->ang.y -= (sc->cam->ang.y >= -5000) ? 5 : 0;
+		sc->cam->ang.y -= (sc->cam->ang.y >= -5000) ? 15 : 0;
 
 	if (keycode == e_key_up || keycode == e_key_down
 		|| keycode == e_key_left || keycode == e_key_right)

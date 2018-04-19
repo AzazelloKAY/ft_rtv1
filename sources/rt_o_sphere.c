@@ -13,7 +13,7 @@
 #include "ft_rtv1.h"
 
 
-t_xy      rt_sphere_intersect(t_ray *r, void *obj)
+t_xy      rt_sphere_intersect(t_ray r, void *obj)
 {
 	t_sphere	*s;
 	t_vec		abc;
@@ -23,9 +23,9 @@ t_xy      rt_sphere_intersect(t_ray *r, void *obj)
     qres.x = -1;
     qres.y = -1;
 	s = (t_sphere*)obj;
-	abc.x = v_dotprod(r->dir, r->dir);
-	len = v_sub(r->or, s->centr);
-	abc.y = 2.0 * v_dotprod(r->dir, len);
+	abc.x = v_dotprod(r.dir, r.dir);
+	len = v_sub(r.or, s->centr);
+	abc.y = 2.0 * v_dotprod(r.dir, len);
 	abc.z = v_dotprod(len, len) - (s->radius * s->radius);
 	v_quad_equ(abc.x, abc.y, abc.z, &qres);
 	return (qres);

@@ -12,7 +12,7 @@
 
 #include "ft_rtv1.h"
 
-t_xy		rt_cylindr_intersect(t_ray *r, void *obj)
+t_xy		rt_cylindr_intersect(t_ray r, void *obj)
 {
 	t_cylinder	*cy;
 	t_xy		res;
@@ -23,10 +23,10 @@ t_xy		rt_cylindr_intersect(t_ray *r, void *obj)
 	res.x = -1;
 	res.y = -1;
 	cy = (t_cylinder*)obj;
-	tprod = v_dotprod(r->dir, cy->v);
-	abc.x = v_dotprod(r->dir, r->dir) - (tprod * tprod);
-	len = v_sub(r->or, cy->c);
-	abc.y = 2 * (v_dotprod(r->dir, len) - (tprod * v_dotprod(len, cy->v)));
+	tprod = v_dotprod(r.dir, cy->v);
+	abc.x = v_dotprod(r.dir, r.dir) - (tprod * tprod);
+	len = v_sub(r.or, cy->c);
+	abc.y = 2 * (v_dotprod(r.dir, len) - (tprod * v_dotprod(len, cy->v)));
 	tprod = v_dotprod(len, cy->v);
 	abc.z = v_dotprod(len, len) - (tprod * tprod) - (cy->rad * cy->rad);
 	v_quad_equ(abc.x, abc.y, abc.z, &res);

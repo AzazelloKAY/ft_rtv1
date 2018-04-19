@@ -25,10 +25,6 @@ static t_vec		cam_to_vp(t_point scren_point, t_img *i, t_cam *c)
 
 	view_dir = v_sub(view_dir, c->orig);
 
-
-//	c->ang.x = 0; //++up; --down;
-//	c->ang.y = -95; //++left; --right;
-//	c->ang.z = 00; //++clockwise; --counterclockwise;
 	view_dir = rotate_vec(view_dir, calc_radians(c->ang));
 
 
@@ -40,7 +36,7 @@ static t_vec		cam_to_vp(t_point scren_point, t_img *i, t_cam *c)
 *** TODO remove double calculation of color for shadows RT
 */
 
-int				ray_trace(t_ray *r, t_scene *s, t_rtres *rt, double tlim)
+int				ray_trace(t_ray r, t_scene *s, t_rtres *rt, double tlim)
 {
 	int 	i;
 	double	closest_t;
@@ -63,7 +59,7 @@ int				ray_trace(t_ray *r, t_scene *s, t_rtres *rt, double tlim)
 		}
 	}
 
-	//rt->colr.val = (closest_o != NULL) ? closest_o->colr.val : 0;
+//	rt->colr.val = (closest_o != NULL) ? closest_o->colr.val : 0;
 	rt->colr.val = 0;
 
 	if ((rt->obj = closest_o) != NULL)
@@ -85,11 +81,9 @@ void				rt_calc_scren(t_win	*w, t_cam *c, t_scene *s)
 		p.x = w->img.minw;
 		while (p.x < w->img.maxw)
 		{
-			/*ray.dir.x = p.x;
-			ray.dir.y = p.y;*/
-			ray.dir = cam_to_vp(p/*ray.dir*/, &w->img, c);
+			ray.dir = cam_to_vp(p, &w->img, c);
 
-			if (ray_trace(&ray, s, &rtres, INFINITY))
+			if (ray_trace(ray, s, &rtres, INFINITY))
 			{
 				//ft_colr_mul_scal(rtres.colr.val, rt_calc_light(ray, s, rtres));
 				rtres.colr.val = rt_calc_light(ray, s, rtres);

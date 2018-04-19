@@ -40,22 +40,23 @@ int 	main()
 
 
 	//AMBI LIGHT
-	rt_set_ambi_light(&sc->light[0], 0.18);
-	//POINT LIGHT
-	double		lxyz[3] = {0, 200, 600};//{-150.0, 150, 150};
-	rt_set_point_light(&sc->light[1], lxyz, 0.45, 0);
-	sc->light[1].colr.val = 0x0000ff;
+	rt_set_ambi_light(&sc->light[1], 0.18);
 
-	double		l2xyz[3] = {0, 200, 150};//{-150.0, 150, 150};
-	rt_set_point_light(&sc->light[2], l2xyz, 0.43, 0);
-	sc->light[2].colr.val = 0xFFFFff;
+	//POINT LIGHT
+	double		lxyz[3] = {200, 0, 200};//{-150.0, 150, 150};
+	rt_set_point_light(&sc->light[2], lxyz, 0.45, 0);
+	sc->light[2].colr.val = 0x0000ff;
+
+	double		l2xyz[3] = {0, /*-240*/-80, 450};//{-150.0, 150, 150};
+	rt_set_point_light(&sc->light[0], l2xyz, 0.43, 0);
+	sc->light[0].colr.val = 0xFFFFff;
 
 
 	//1
-	double s1xyz[3] = {60, 0, 490};
+	double s1xyz[3] = {60, 0, 390};
 	rt_sphr_obj(&sc->obj[0], rt_new_sphr(s1xyz, 60), 0x00FF00);
 	//2
-	double s2xyz[3] = {-20, 0, 500};
+	double s2xyz[3] = {0, 0, 500};
 	rt_sphr_obj(&sc->obj[1], rt_new_sphr(s2xyz, 50), 0xFF0000);
 
 	//3

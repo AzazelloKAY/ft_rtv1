@@ -79,7 +79,7 @@ typedef struct 	s_light
 typedef struct	s_obj
 {
 	void	*objp;
-    t_xy	(*intersect)(t_ray *r,  void *obj);
+    t_xy	(*intersect)(t_ray r,  void *obj);
 	t_vec	(*getnormal)(t_vec dot, void *obj);
 	t_color	colr;
 	double	shine;
@@ -108,7 +108,7 @@ typedef struct	s_rtres
 *** rt_sphere.c
 */
 
-t_xy			rt_sphere_intersect(t_ray *r, void *obj);
+t_xy			rt_sphere_intersect(t_ray r, void *obj);
 t_sphere		*rt_new_sphr(double xyz[3], double rad);
 void 			rt_sphr_obj(t_obj *o, t_sphere *s, uint32_t colr);
 
@@ -116,7 +116,7 @@ void 			rt_sphr_obj(t_obj *o, t_sphere *s, uint32_t colr);
 *** rt_o_plane.c
 */
 
-t_xy			rt_plane_intersect(t_ray *r, void *obj);
+t_xy			rt_plane_intersect(t_ray r, void *obj);
 t_plane			*rt_new_plane(double xyz[3], t_vec n);
 void			rt_plane_obj(t_obj *o, t_plane *p, uint32_t colr);
 
@@ -124,7 +124,7 @@ void			rt_plane_obj(t_obj *o, t_plane *p, uint32_t colr);
 *** rt_o_cylinder.c
 */
 
-t_xy			rt_cylindr_intersect(t_ray *r, void *obj);
+t_xy			rt_cylindr_intersect(t_ray r, void *obj);
 t_cylinder  	*rt_new_cylindr(double xyz[3], double rad, t_vec v, double mxm);
 void 			rt_cylindr_obj(t_obj *o, t_cylinder *cy, uint32_t colr);
 
@@ -132,7 +132,7 @@ void 			rt_cylindr_obj(t_obj *o, t_cylinder *cy, uint32_t colr);
 *** rt_o_cone.c
 */
 
-t_xy			rt_cone_intersect(t_ray *r, void *obj);
+t_xy			rt_cone_intersect(t_ray r, void *obj);
 t_cone			*rt_new_cone(double xyz[3], t_vec v, double k_minm_maxm[3]);
 void			rt_cone_obj(t_obj *o, t_cone *co, uint32_t colr);
 
@@ -140,7 +140,7 @@ void			rt_cone_obj(t_obj *o, t_cone *co, uint32_t colr);
 *** rt_screen_trace.c
 */
 
-int				ray_trace(t_ray *r, t_scene *s, t_rtres *rt, double tlim);
+int				ray_trace(t_ray r, t_scene *s, t_rtres *rt, double tlim);
 void			rt_calc_scren(t_win	*w, t_cam *c, t_scene *o);
 
 /*

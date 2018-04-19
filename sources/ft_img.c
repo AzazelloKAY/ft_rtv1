@@ -19,6 +19,7 @@ void			ft_pixtoimg(t_img *i, t_point *p)
 
 void			ft_pixtoimg_shift(t_img *i, t_point *p)
 {
+
 	i->str[((i->w * (i->maxh - p->y)) + (p->x + i->maxw))] = p->colr.val;
 }
 

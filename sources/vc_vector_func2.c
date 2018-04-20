@@ -12,34 +12,11 @@
 
 #include "ft_vector.h"
 
-t_vec		*v_new(t_vec *v)
-{
-	t_vec *res;
-	if (!(res = ft_memalloc(sizeof(t_vec))))
-		return (NULL);
-	if (v != NULL)
-	{
-		res->x = v->x;
-		res->y = v->y;
-		res->z = v->z;
-	}
-	return (res);
-}
+/*
+*** vector a-b len == v_sub(b, a)
+*/
 
-//double 		v_len2(t_vec a, t_vec b)
-//{
-//	double	res;
-//	t_vec	t;
-//
-// //	t.x = (b.x - a.x);
-// //	t.y = (b.y - a.y);
-// //	t.z = (b.z - a.z);
-//	t = v_sub(b, a);
-//	res = sqrt((t.x * t.x) + (t.y * t.y) + (t.z * t.z));
-//	return (res);
-//}
-
-double 		v_len1(t_vec a) //v_sub(b, a)
+double		v_len1(t_vec a)
 {
 	double	res;
 

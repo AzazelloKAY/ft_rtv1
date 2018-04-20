@@ -15,9 +15,9 @@
 
 # include <math.h>
 # include "../libft/libft.h"
-//# include <mlx.h>
-//# include </usr/local/include/mlx.h>
 # include </usr/local/include/mlx.h>
+
+//# include <mlx.h>
 # define WINHEIGHT 600
 # define WINWIDTH 900
 
@@ -95,31 +95,30 @@ typedef struct		s_img
 
 typedef struct		s_win
 {
-	void		*mlx;
-	void		*win;
-	int			h;
-	int			w;
-	t_img		img;
+	void	*mlx;
+	void	*win;
+	int		h;
+	int		w;
+	t_img	img;
 }					t_win;
 
 /*
 *** ft_img.c
 */
 
-void			ft_pixtoimg(t_img *i, t_point *p);
-void			ft_pixtoimg_shift(t_img *i, t_point *p);
-void			ft_drawimg(t_win *w);
-uint32_t		colr_scal(uint32_t colr, double n);
-uint32_t 		colr_add(uint32_t colr1, uint32_t colr2);
+void				ft_pixtoimg_shift(t_img *i, t_point *p);
+void				ft_drawimg(t_win *w);
+uint32_t			colr_scal(uint32_t colr, double n);
+uint32_t 			colr_add(uint32_t colr1, uint32_t colr2);
 
 /*
 *** ft_img_init_destr.c
 */
 
-t_win			*ft_init_mlx(char *name);
-int				fr_remake_img(t_win *w);
-int				ft_init_img(t_win *w);
-void			ft_destroy_all(t_win *w);
-int				ft_exit_x(t_win *w);
+t_win				*ft_init_mlx(char *name);
+int					fr_remake_img(t_win *w);
+int					ft_init_img(t_win *w);
+void				ft_destroy_all(t_win *w);
+int					ft_exit_x(t_win *w);
 
 #endif

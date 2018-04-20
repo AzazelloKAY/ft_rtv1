@@ -30,7 +30,5 @@ t_cam	*cam_new(double x, double y, double z, double fov)
 	c->vpw = 1;
 	c->tmin = 0;
 	c->tmax = INFINITY;
-
-
 	return (c);
 }

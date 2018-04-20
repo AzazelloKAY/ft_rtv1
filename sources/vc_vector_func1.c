@@ -60,4 +60,3 @@ t_vec		v_mul_scal(t_vec a, double b)
 	res.z = a.z * b;
 	return (res);
 }
-

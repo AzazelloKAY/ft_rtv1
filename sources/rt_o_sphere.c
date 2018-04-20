@@ -12,16 +12,15 @@
 
 #include "ft_rtv1.h"
 
-
-t_xy      rt_sphere_intersect(t_ray r, void *obj)
+t_xy		rt_sphere_intersect(t_ray r, void *obj)
 {
 	t_sphere	*s;
 	t_vec		abc;
 	t_vec		len;
 	t_xy		qres;
 
-    qres.x = -1;
-    qres.y = -1;
+	qres.x = -1;
+	qres.y = -1;
 	s = (t_sphere*)obj;
 	abc.x = v_dotprod(r.dir, r.dir);
 	len = v_sub(r.or, s->centr);
@@ -54,20 +53,15 @@ t_sphere	*rt_new_sphr(double xyz[3], double rad)
 	return (s);
 }
 
-void 		rt_sphr_obj(t_obj *o, t_sphere *s, uint32_t colr)
+void		rt_sphr_obj(t_obj *o, t_sphere *s, uint32_t colr)
 {
-    o->colr.val = colr;
-    o->intersect = rt_sphere_intersect;
+	o->colr.val = colr;
+	o->intersect = rt_sphere_intersect;
 	o->getnormal = rt_sphere_normal;
-    o->objp = s;
+	o->objp = s;
 	o->shine = 2.0;
 }
 
 /*
- * точка пересечеия(удара луча O+tD) - центр сферы
- * обязательно нормализуем
- */
-
-
-
-
+*** hit point (ray hit O+tD) - sphere center
+*/

@@ -12,15 +12,6 @@
 
 #include "ft_rtv1.h"
 
-void	print_v(t_vec *a)
-{
-	printf(">x=%10f y=%10f z=%10f\n", a->x, a->y, a->z);
-}
-
-/*
-*** viewpoint
-*/
-
 
 void	rt_redraw(t_scene *sc)
 {
@@ -34,21 +25,21 @@ int 	main()
 
 	sc = rt_new_scene(6, 3); //onj num //light num
 
-	sc->w = ft_init_mlx("akokoshko`s rtv1");
+	sc->w = ft_init_mlx("akokoshko`s RTv1");
 	ft_init_img(sc->w);
-	sc->cam = cam_new(0, 0, -0.5, 95);
+	sc->cam = cam_new(0, 0, 0, 95);
 
 
 	//AMBI LIGHT
-	rt_set_ambi_light(&sc->light[1], 0.18);
+	set_ambi_light(&sc->light[1], 0.18);
 
 	//POINT LIGHT
-	double		lxyz[3] = {200, 0, 200};//{-150.0, 150, 150};
-	rt_set_point_light(&sc->light[2], lxyz, 0.45, 0);
+	double lxyz[3] = {-200, 0, 200};
+	set_point_light(&sc->light[2], lxyz, 0.45, 0);
 	sc->light[2].colr.val = 0x0000ff;
 
-	double		l2xyz[3] = {0, /*-240*/-80, 450};//{-150.0, 150, 150};
-	rt_set_point_light(&sc->light[0], l2xyz, 0.43, 0);
+	double l2xyz[3] = {0, -80, 450};
+	set_point_light(&sc->light[0], l2xyz, 0.43, 0);
 	sc->light[0].colr.val = 0xFFFFff;
 
 
@@ -92,13 +83,7 @@ int 	main()
 	rt_plane_obj(&sc->obj[5], rt_new_plane(p2xyz, n), 0xF0C173);
 
 
-
-
-
 	rt_redraw(sc);
-
-
-
 	ft_keyhookloop(sc);
 
     return 0;

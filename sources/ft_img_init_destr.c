@@ -47,12 +47,10 @@ int				ft_init_img(t_win *w)
 	w->img.bitperpix = sizeof(int) * 8;
 	w->img.size_line = sizeof(int) * w->img.w;
 	w->img.endian = 0;
-
 	w->img.maxh = (w->h / 2);
 	w->img.minh = -(w->h / 2);
 	w->img.maxw = (w->w / 2);
 	w->img.minw = - (w->w / 2);
-
 	return (fr_remake_img(w));
 }
 

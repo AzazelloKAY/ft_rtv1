@@ -17,12 +17,7 @@
 # include "ft_vector.h"
 # include "ft_img.h"
 # include <stdio.h>
-//# include <math.h>
 # include <pthread.h>
-
-
-//typedef double	t_vector __attribute__((vector_size(sizeof(double)*3)));
-
 
 /*
 ** FT_RTv1 sources
@@ -148,27 +143,21 @@ void			rt_calc_scren(t_win	*w, t_cam *c, t_scene *o);
 */
 
 t_scene			*rt_new_scene(int onum, int lnum);
-void			rt_set_ambi_light(t_light *l, double i);
-void			rt_set_point_light(t_light *l, double xyz[3], double i, double f);
+void			set_ambi_light(t_light *l, double i);
+void			set_point_light(t_light *l, double xyz[3], double i, double f);
 
 /*
 *** rt_light.c
 */
 
-//double			rt_get_l_intensity(t_ray r, t_scene *s, double t);
 uint32_t		rt_calc_light(t_ray ray, t_scene *s, t_rtres rtres);
-
-/*
-***
-*/
-
-double			f_get_smalest(t_xy *t);
 
 /*
 *** ft_img_keyhook.c
 */
 
 void			ft_keyhookloop(t_scene *sc);
+void			ft_writhelp(t_win *w);
 
 /*
 *** main

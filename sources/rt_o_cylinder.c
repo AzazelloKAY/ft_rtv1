@@ -41,7 +41,6 @@ t_vec		rt_cylindr_normal(t_vec dot, void *obj)
 	double		len;
 
 	c = (t_cylinder*)obj;
-
 	res = v_sub(dot, c->c);
 	len = v_dotprod(res, c->v);
 	v = c->v;
@@ -57,20 +56,20 @@ t_vec		rt_cylindr_normal(t_vec dot, void *obj)
 
 t_cylinder	*rt_new_cylindr(double xyz[3], double rad, t_vec v, double mxm)
 {
-    t_cylinder *cy;
+	t_cylinder *cy;
 
-    if (!(cy = ft_memalloc(sizeof(t_cylinder))))
-        return (NULL);
-    cy->c.x = xyz[0];
-    cy->c.y = xyz[1];
-    cy->c.z = xyz[2];
-    cy->rad = rad;
-    cy->v = v_normalise(v);
+	if (!(cy = ft_memalloc(sizeof(t_cylinder))))
+		return (NULL);
+	cy->c.x = xyz[0];
+	cy->c.y = xyz[1];
+	cy->c.z = xyz[2];
+	cy->rad = rad;
+	cy->v = v_normalise(v);
 	cy->maxm = mxm;
-    return (cy);
+	return (cy);
 }
 
-void 		rt_cylindr_obj(t_obj *o, t_cylinder *cy, uint32_t colr)
+void		rt_cylindr_obj(t_obj *o, t_cylinder *cy, uint32_t colr)
 {
 	o->colr.val = colr;
 	o->intersect = rt_cylindr_intersect;

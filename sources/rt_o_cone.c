@@ -18,13 +18,9 @@ t_xy		rt_cone_intersect(t_ray r, void *obj)
 	t_xy		res;
 	t_vec		abc;
 
-
-
 	double		kk1;
 	double		tt;
 	t_vec		len;
-
-
 	co = (t_cone*)obj;
 	res.x = -1;
 	res.y = -1;
@@ -50,7 +46,7 @@ t_vec		rt_cone_normal(t_vec dot, void *obj)
 	res = v_sub(dot, c->c);
 	len = v_dotprod(res, c->v);
 	v = c->v;
-	if (len < 0) //???????????????????
+	if (len < 0)
 	{
 		v = v_mul_scal(v, -1);
 		len = -len;
@@ -58,8 +54,6 @@ t_vec		rt_cone_normal(t_vec dot, void *obj)
 	v = v_mul_scal(v, len);
 	v = v_mul_scal(v, 1 + (c->k * c->k));
 	res = v_sub(res, v);
-
-
 	return (v_normalise(res));
 }
 

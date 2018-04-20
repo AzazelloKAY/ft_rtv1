@@ -22,7 +22,6 @@ t_xy		rt_plane_intersect(t_ray r, void *obj)
     res.x = -1;
     res.y = -1;
 	p = (t_plane*)obj;
-
 	ab.y = v_dotprod(p->n, r.dir);
 	if (ab.y >= 0.00000000000001)
 	{
@@ -38,8 +37,7 @@ t_vec		rt_plane_normal(t_vec dot, void *obj)
 	t_plane		*p;
 
 	p = (t_plane*)obj;
-	//dot = v_mul_scal(dot, -1);
-	if (v_dotprod(p->n, dot) > 0) //больше
+	if (v_dotprod(p->n, dot) > 0)
 		return (v_mul_scal(p->n, -1));
 	return (p->n);
 }

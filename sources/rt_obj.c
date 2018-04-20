@@ -12,7 +12,7 @@
 
 #include "ft_rtv1.h"
 
-static t_obj		*rt_new_obj(int onum)
+static t_obj	*rt_new_obj(int onum)
 {
 	t_obj	*o;
 
@@ -23,7 +23,7 @@ static t_obj		*rt_new_obj(int onum)
 	return (o);
 }
 
-static t_light		*rt_new_light(int lnum)
+static t_light	*rt_new_light(int lnum)
 {
 	t_light	*l;
 
@@ -34,7 +34,7 @@ static t_light		*rt_new_light(int lnum)
 	return (l);
 }
 
-t_scene				*rt_new_scene(int onum, int lnum)
+t_scene			*rt_new_scene(int onum, int lnum)
 {
 	t_scene	*scene;
 
@@ -56,7 +56,7 @@ t_scene				*rt_new_scene(int onum, int lnum)
 	return (scene);
 }
 
-void				rt_set_ambi_light(t_light *l, double i)
+void			set_ambi_light(t_light *l, double i)
 {
 	l->type = e_ambient;
 	l->cntr.x = 0;
@@ -67,7 +67,7 @@ void				rt_set_ambi_light(t_light *l, double i)
 	l->fading = 0;
 }
 
-void				rt_set_point_light(t_light *l, double xyz[3], double i, double f)
+void			set_point_light(t_light *l, double xyz[3], double i, double f)
 {
 	l->type = e_point;
 	l->cntr.x = xyz[0];
